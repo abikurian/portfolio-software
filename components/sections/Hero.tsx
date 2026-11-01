@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { gsap, useGSAP } from '@/lib/gsap';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
+import { KineticGrid } from '@/components/ui/kinetic-grid';
 import { useLenis } from '@/components/providers/SmoothScroll';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 
@@ -48,8 +49,11 @@ export function Hero() {
       ref={heroRef}
       id="hero"
       aria-label="Introduction"
-      className="relative min-h-[80vh] flex flex-col justify-center pt-24 md:pt-32 pb-16 border-b border-border/80"
+      className="relative min-h-[80vh] flex flex-col justify-center pt-24 md:pt-32 pb-16 border-b border-border/80 overflow-hidden"
     >
+      {/* Task 8: Kinetic grid background (pointer-events none, behind content) */}
+      <KineticGrid parentRef={heroRef} />
+
       <Container className="my-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Title on two balanced lines */}
