@@ -62,14 +62,14 @@ export function Hero() {
       {/* Kinetic grid background (pointer-events none, behind content) */}
       <KineticGrid parentRef={heroRef} />
 
-      <Container className="relative z-10">
+      <Container className="relative z-10 my-auto -translate-y-3 sm:-translate-y-5">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-[clamp(1rem,2vw,2rem)]">
-          {/* Title on two balanced lines spanning width */}
-          <div className="col-span-12">
+          {/* At xl the name block spans columns 1 to 9 at most; below that it spans the full width */}
+          <div className="col-span-12 xl:col-span-9">
             <h1
               ref={titleRef}
               aria-label="ABI KURIAN VARGHESE"
-              className="font-anton uppercase tracking-tight text-[clamp(2.75rem,10vw,8.5rem)] leading-[0.9] text-foreground select-none overflow-hidden"
+              className="font-anton uppercase tracking-tight text-[clamp(2.75rem,9vw,8.5rem)] leading-[0.95] text-balance text-left text-foreground select-none overflow-hidden"
               style={{ overflowWrap: 'anywhere' }}
             >
               <span className="block overflow-hidden">
