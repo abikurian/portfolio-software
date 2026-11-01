@@ -155,7 +155,7 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-4 left-0 right-0 z-50 flex items-center justify-center pointer-events-none px-4">
+    <header className="fixed top-[calc(1rem+env(safe-area-inset-top,0px))] left-0 right-0 z-50 flex items-center justify-center pointer-events-none px-4">
       {/* Desktop / Tablet NavHeader with sliding highlight */}
       <nav
         aria-label="Primary Navigation"
@@ -253,7 +253,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-background/98 backdrop-blur-lg flex flex-col justify-between p-8 sm:p-12 pointer-events-auto"
+            className="fixed inset-0 z-50 bg-background/98 backdrop-blur-lg flex flex-col justify-between p-8 sm:p-12 pt-[calc(2rem+env(safe-area-inset-top,0px))] pb-[calc(2rem+env(safe-area-inset-bottom,0px))] pl-[calc(2rem+env(safe-area-inset-left,0px))] pr-[calc(2rem+env(safe-area-inset-right,0px))] min-h-screen min-h-svh pointer-events-auto"
           >
             {/* Top row with Close button */}
             <div className="flex items-center justify-between border-b border-border/80 pb-6">

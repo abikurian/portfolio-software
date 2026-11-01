@@ -23,7 +23,7 @@ export function Contact() {
   };
 
   return (
-    <Section id="contact" ariaLabelledBy="contact-heading" className="pb-24 sm:pb-36">
+    <Section id="contact" ariaLabelledBy="contact-heading" className="pb-[calc(6rem+env(safe-area-inset-bottom,0px))] sm:pb-36">
       <Container>
         <SectionHeading id="contact-heading" title="CONTACT" />
 
