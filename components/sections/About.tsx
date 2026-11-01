@@ -9,7 +9,7 @@ import { FadeUp } from '@/components/motion/FadeUp';
 export function About() {
   const quickFacts = [
     { label: 'Location', value: 'Kochi, Kerala' },
-    { label: 'Degree', value: 'B.Tech CSE, 2023-2027' },
+    { label: 'Degree', value: 'B.Tech CSE, 2023 to 2027' },
     { label: 'Institution', value: 'KTU / SNGCE' },
     { label: 'Current focus', value: 'Generative AI with local models (Ollama)' },
   ];
@@ -20,16 +20,28 @@ export function About() {
         <SectionHeading id="about-heading" number="01 /" title="ABOUT" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          {/* Main Statement */}
-          <div className="lg:col-span-7 space-y-6">
+          {/* Left: Three verbatim paragraphs */}
+          <div className="lg:col-span-7 space-y-6 text-foreground/90 text-base sm:text-lg leading-relaxed">
             <FadeUp>
-              <p className="text-xl sm:text-2xl font-normal leading-relaxed text-foreground tracking-tight">
+              <p>
                 I&apos;m a Computer Science student at SNGCE, Kochi, building full-stack Progressive Web Apps with secure backends in PostgreSQL and Firebase. I like understanding a system well enough to explain why it was built the way it was.
+              </p>
+            </FadeUp>
+
+            <FadeUp delay={0.06}>
+              <p>
+                Most of my work sits where data has to stay correct. A finance tracker that syncs offline changes to the cloud without losing parity, protected by Row Level Security. A campus bus tracker that uses a geolocation algorithm to decide how often it syncs.
+              </p>
+            </FadeUp>
+
+            <FadeUp delay={0.12}>
+              <p>
+                I also work below the web layer: Linux, C and socket programming, and relational schema design in MySQL. Lately I&apos;ve been building with generative AI pipelines and running local models with Ollama.
               </p>
             </FadeUp>
           </div>
 
-          {/* Quick Facts */}
+          {/* Right: Quick Facts block */}
           <div className="lg:col-span-5">
             <FadeUp delay={0.1}>
               <div className="border-t border-border pt-4">
