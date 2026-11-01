@@ -13,6 +13,10 @@ export type Project = {
   href?: string;
   repo?: string;
   video?: string;
+  details?: string[];
+  points?: string[];
+  links?: { label: string; href: string }[];
+  tags?: string[];
 };
 
 export type Experience = {
@@ -21,10 +25,10 @@ export type Experience = {
   start: string;
   end?: string;
   mode?: 'Remote' | 'On-site';
-  points: string[];
+  points?: string[];
 };
 
 export type StackGroup = {
   label: string;
-  items: string[];
+  items?: string[];
 };

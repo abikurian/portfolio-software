@@ -52,7 +52,7 @@ export function Header() {
 
   // Track active section using IntersectionObserver with -45% 0 -45% 0 rootMargin
   useEffect(() => {
-    const sectionIds = NAV_ITEMS.map((item) => item.href.substring(1));
+    const sectionIds = (NAV_ITEMS ?? []).map((item) => item.href.substring(1));
     const observers: IntersectionObserver[] = [];
 
     sectionIds.forEach((id) => {
@@ -170,7 +170,7 @@ export function Header() {
             updateHighlight(activeSection);
           }}
         >
-          {NAV_ITEMS.map((item) => {
+          {(NAV_ITEMS ?? []).map((item) => {
             const isActive = activeSection === item.href;
             const isHovered = hoveredHref === item.href;
             const isHighlighted = isHovered || (!hoveredHref && isActive);
@@ -284,7 +284,7 @@ export function Header() {
                 }}
                 className="space-y-4"
               >
-                {NAV_ITEMS.map((item) => {
+                {(NAV_ITEMS ?? []).map((item) => {
                   const isActive = activeSection === item.href;
                   return (
                     <motion.li

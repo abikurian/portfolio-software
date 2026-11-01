@@ -62,7 +62,7 @@ export function RevealText({
       className: cn('inline-block leading-inherit', className),
     },
     <span aria-hidden="true" className="inline flex-wrap">
-      {words.map((word, i) => (
+      {(words ?? []).map((word, i) => (
         <span
           key={i}
           className="inline-block overflow-hidden align-top mr-[0.25em] last:mr-0 pb-[0.08em]"

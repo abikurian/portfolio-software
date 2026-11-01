@@ -33,7 +33,7 @@ export function TechMarquee() {
     >
       <div className="flex w-max group">
         <div className="flex items-center gap-6 shrink-0 font-mono text-xs uppercase tracking-wider text-muted-foreground animate-[marquee_40s_linear_infinite] group-hover:[animation-play-state:paused] motion-reduce:animate-none">
-          {MARQUEE_ITEMS.map((item, i) => (
+          {(MARQUEE_ITEMS ?? []).map((item, i) => (
             <React.Fragment key={i}>
               <span>{item}</span>
               <span className="text-border select-none">&middot;</span>
@@ -44,7 +44,7 @@ export function TechMarquee() {
           aria-hidden="true"
           className="flex items-center gap-6 shrink-0 font-mono text-xs uppercase tracking-wider text-muted-foreground animate-[marquee_40s_linear_infinite] group-hover:[animation-play-state:paused] motion-reduce:hidden"
         >
-          {MARQUEE_ITEMS.map((item, i) => (
+          {(MARQUEE_ITEMS ?? []).map((item, i) => (
             <React.Fragment key={`repeat-${i}`}>
               <span>{item}</span>
               <span className="text-border select-none">&middot;</span>

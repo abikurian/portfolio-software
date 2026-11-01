@@ -57,7 +57,7 @@ export function Stack() {
               className="border-t border-border"
               onMouseLeave={() => setHoveredIdx(null)}
             >
-              {stackGroups.map((group, idx) => {
+              {(stackGroups ?? []).map((group, idx) => {
                 const isHovered = hoveredIdx === idx;
                 const isDimmed = hoveredIdx !== null && !isHovered;
 
@@ -89,9 +89,11 @@ export function Stack() {
 
                       {/* Plain Text List separated by middle dots */}
                       <div className="md:col-span-8">
-                        <p className="font-mono text-sm sm:text-base text-foreground leading-relaxed">
-                          {group.items.join('   /   ')}
-                        </p>
+                        {(group.items ?? []).length > 0 && (
+                          <p className="font-mono text-sm sm:text-base text-foreground leading-relaxed">
+                            {(group.items ?? []).join('   /   ')}
+                          </p>
+                        )}
                       </div>
 
                       {/* Thin accent line drawing under hovered group */}

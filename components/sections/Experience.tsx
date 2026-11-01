@@ -63,7 +63,7 @@ export function Experience() {
 
               <div className="sm:pl-10 space-y-12 sm:space-y-16">
                 {/* Internships */}
-                {experiences.map((exp, idx) => (
+                {(experiences ?? []).map((exp, idx) => (
                   <FadeUp key={exp.org} delay={idx * 0.08}>
                     <div
                       ref={(el) => {
@@ -88,14 +88,16 @@ export function Experience() {
                           {exp.role}
                         </h3>
 
-                        <ul className="space-y-2 text-sm sm:text-base text-muted-foreground leading-relaxed">
-                          {exp.points.map((point, pIdx) => (
-                            <li key={pIdx} className="flex items-start gap-3">
-                              <span className="text-primary font-mono select-none">&bull;</span>
-                              <span>{point}</span>
-                            </li>
-                          ))}
-                        </ul>
+                        {(exp.points ?? []).length > 0 && (
+                          <ul className="space-y-2 text-sm sm:text-base text-muted-foreground leading-relaxed">
+                            {(exp.points ?? []).map((point, pIdx) => (
+                              <li key={pIdx} className="flex items-start gap-3">
+                                <span className="text-primary font-mono select-none">&bull;</span>
+                                <span>{point}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
                     </div>
                   </FadeUp>
@@ -130,26 +132,28 @@ export function Experience() {
                 </FadeUp>
 
                 {/* Academic Seminar & Certification */}
-                <FadeUp delay={0.25}>
-                  <div className="pt-2">
-                    <h4 className="font-mono text-xs uppercase tracking-widest text-primary mb-6">
-                      ADDITIONAL CREDENTIALS &amp; SEMINARS
-                    </h4>
+                {(extras ?? []).length > 0 && (
+                  <FadeUp delay={0.25}>
+                    <div className="pt-2">
+                      <h4 className="font-mono text-xs uppercase tracking-widest text-primary mb-6">
+                        ADDITIONAL CREDENTIALS &amp; SEMINARS
+                      </h4>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      {extras.map((extra, eIdx) => (
-                        <div key={eIdx} className="border-l border-border pl-4">
-                          <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground block mb-1">
-                            {extra.label}
-                          </span>
-                          <p className="text-sm text-foreground leading-relaxed font-medium">
-                            {extra.detail}
-                          </p>
-                        </div>
-                      ))}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {(extras ?? []).map((extra, eIdx) => (
+                          <div key={eIdx} className="border-l border-border pl-4">
+                            <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground block mb-1">
+                              {extra.label}
+                            </span>
+                            <p className="text-sm text-foreground leading-relaxed font-medium">
+                              {extra.detail}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </FadeUp>
+                  </FadeUp>
+                )}
               </div>
             </div>
           </div>

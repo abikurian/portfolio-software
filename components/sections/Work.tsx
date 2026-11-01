@@ -93,7 +93,7 @@ export function Work() {
               onMouseLeave={handleMouseLeaveList}
               className="border-t border-border divide-y divide-border/60"
             >
-              {projects.map((project, idx) => {
+              {(projects ?? []).map((project, idx) => {
                 const isOpen = activeSlug === project.slug;
                 const isDimmed = activeSlug !== null && !isOpen;
 
@@ -137,9 +137,9 @@ export function Work() {
 
                           {/* Stack line */}
                           <div className="lg:col-span-6 lg:text-right">
-                            {project.stack && project.stack.length > 0 && (
+                            {(project.stack ?? []).length > 0 && (
                               <div className="font-mono text-xs text-foreground/80">
-                                {project.stack.join(' · ')}
+                                {(project.stack ?? []).join(' · ')}
                               </div>
                             )}
                           </div>
@@ -180,12 +180,54 @@ export function Work() {
                               {project.summary}
                             </p>
 
-                            {project.stack && project.stack.length > 0 && (
+                            {(project.stack ?? []).length > 0 && (
                               <div className="font-mono text-xs text-muted-foreground">
                                 <span className="text-primary uppercase tracking-wider block mb-1">
                                   Technical Stack
                                 </span>
-                                <span className="text-foreground">{project.stack.join('   /   ')}</span>
+                                <span className="text-foreground">{(project.stack ?? []).join('   /   ')}</span>
+                              </div>
+                            )}
+
+                            {(project.details ?? []).length > 0 && (
+                              <ul className="space-y-1 text-sm text-muted-foreground">
+                                {(project.details ?? []).map((detail, dIdx) => (
+                                  <li key={dIdx}>{detail}</li>
+                                ))}
+                              </ul>
+                            )}
+
+                            {(project.points ?? []).length > 0 && (
+                              <ul className="space-y-1 text-sm text-muted-foreground">
+                                {(project.points ?? []).map((point, pIdx) => (
+                                  <li key={pIdx}>{point}</li>
+                                ))}
+                              </ul>
+                            )}
+
+                            {(project.tags ?? []).length > 0 && (
+                              <div className="flex flex-wrap gap-2 pt-2">
+                                {(project.tags ?? []).map((tag, tIdx) => (
+                                  <span key={tIdx} className="font-mono text-xs text-muted-foreground">
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+
+                            {(project.links ?? []).length > 0 && (
+                              <div className="flex flex-wrap gap-4 pt-2">
+                                {(project.links ?? []).map((link, lIdx) => (
+                                  <a
+                                    key={lIdx}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noreferrer noopener"
+                                    className="font-mono text-xs text-primary underline underline-offset-4 hover:text-foreground"
+                                  >
+                                    {link.label}
+                                  </a>
+                                ))}
                               </div>
                             )}
                           </div>
