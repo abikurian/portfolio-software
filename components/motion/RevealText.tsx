@@ -48,6 +48,11 @@ export function RevealText({
             start: 'top 88%',
             once: true,
           },
+          onComplete: () => {
+            elements.forEach((el) => {
+              (el as HTMLElement).style.willChange = 'auto';
+            });
+          },
         }
       );
     },

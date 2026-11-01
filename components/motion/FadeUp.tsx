@@ -45,6 +45,11 @@ export function FadeUp({
             start: triggerHook,
             once: true,
           },
+          onComplete: () => {
+            if (ref.current) {
+              ref.current.style.willChange = 'auto';
+            }
+          },
         }
       );
     },

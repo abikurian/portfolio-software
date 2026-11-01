@@ -24,24 +24,33 @@ export function ScrubLine({
         return;
       }
 
-      const targetTrigger = triggerRef?.current || lineRef.current.parentElement;
-      if (!targetTrigger) return;
+      const mm = gsap.matchMedia();
+      mm.add('(min-width: 768px)', () => {
+        const targetTrigger = triggerRef?.current || lineRef.current?.parentElement;
+        if (!targetTrigger || !lineRef.current) return;
 
-      gsap.fromTo(
-        lineRef.current,
-        { scaleY: 0 },
-        {
-          scaleY: 1,
-          ease: 'none',
-          transformOrigin: 'top center',
-          scrollTrigger: {
-            trigger: targetTrigger,
-            start: 'top 75%',
-            end: 'bottom 85%',
-            scrub: 0.5,
-          },
+        gsap.fromTo(
+          lineRef.current,
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: 'none',
+            transformOrigin: 'top center',
+            scrollTrigger: {
+              trigger: targetTrigger,
+              start: 'top 75%',
+              end: 'bottom 85%',
+              scrub: 0.5,
+            },
+          }
+        );
+      });
+
+      mm.add('(max-width: 767px)', () => {
+        if (lineRef.current) {
+          gsap.set(lineRef.current, { scaleY: 1 });
         }
-      );
+      });
     },
     { scope: lineRef, dependencies: [triggerRef] }
   );

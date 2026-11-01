@@ -26,20 +26,30 @@ export function ParallaxImage({
         return;
       }
 
-      gsap.fromTo(
-        targetRef.current,
-        { yPercent: -speed },
-        {
-          yPercent: speed,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
+      const mm = gsap.matchMedia();
+      mm.add('(min-width: 768px)', () => {
+        if (!containerRef.current || !targetRef.current) return;
+        gsap.fromTo(
+          targetRef.current,
+          { yPercent: -speed },
+          {
+            yPercent: speed,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          }
+        );
+      });
+
+      mm.add('(max-width: 767px)', () => {
+        if (targetRef.current) {
+          gsap.set(targetRef.current, { yPercent: 0 });
         }
-      );
+      });
     },
     { scope: containerRef, dependencies: [speed] }
   );

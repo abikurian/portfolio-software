@@ -187,9 +187,11 @@ export function KineticGrid({ parentRef, className }: KineticGridProps) {
       });
     };
 
-    parent.addEventListener('pointermove', handlePointerMove, { passive: true });
-    parent.addEventListener('pointerleave', handlePointerLeave, { passive: true });
-    parent.addEventListener('click', handleClick, { passive: true });
+    if (!isStatic) {
+      parent.addEventListener('pointermove', handlePointerMove, { passive: true });
+      parent.addEventListener('pointerleave', handlePointerLeave, { passive: true });
+      parent.addEventListener('click', handleClick, { passive: true });
+    }
 
     const resizeObserver = new ResizeObserver(() => handleResize());
     resizeObserver.observe(parent);
@@ -200,7 +202,7 @@ export function KineticGrid({ parentRef, className }: KineticGridProps) {
 
     const render = () => {
       try {
-        if (!isVisible) return;
+        if (!isVisible || isStatic) return;
 
         ctx.clearRect(0, 0, width, height);
 
@@ -335,9 +337,11 @@ export function KineticGrid({ parentRef, className }: KineticGridProps) {
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      parent.removeEventListener('pointermove', handlePointerMove);
-      parent.removeEventListener('pointerleave', handlePointerLeave);
-      parent.removeEventListener('click', handleClick);
+      if (!isStatic) {
+        parent.removeEventListener('pointermove', handlePointerMove);
+        parent.removeEventListener('pointerleave', handlePointerLeave);
+        parent.removeEventListener('click', handleClick);
+      }
     };
   }, [parentRef]);
 
