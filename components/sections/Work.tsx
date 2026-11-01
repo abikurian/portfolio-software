@@ -1,103 +1,126 @@
 'use client';
 
 import * as React from 'react';
+import { useState, useRef, useSyncExternalStore } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { FadeUp } from '@/components/motion/FadeUp';
 import { projects } from '@/lib/data/projects';
+import { cn } from '@/lib/utils';
+
+function useIsFinePointer() {
+  return useSyncExternalStore(
+    (callback) => {
+      const mq = window.matchMedia('(pointer: fine)');
+      mq.addEventListener('change', callback);
+      return () => mq.removeEventListener('change', callback);
+    },
+    () => window.matchMedia('(pointer: fine)').matches,
+    () => false
+  );
+}
+
+function usePrefersReducedMotion() {
+  return useSyncExternalStore(
+    (callback) => {
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      mq.addEventListener('change', callback);
+      return () => mq.removeEventListener('change', callback);
+    },
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    () => false
+  );
+}
 
 export function Work() {
-  const featured = projects[0];
-  const otherProjects = projects.slice(1);
+  const [activeSlug, setActiveSlug] = useState<string | null>(null);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isFinePointer = useIsFinePointer();
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const handleMouseEnter = (slug: string) => {
+    if (!isFinePointer) return;
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    hoverTimeoutRef.current = setTimeout(() => {
+      setActiveSlug(slug);
+    }, 80);
+  };
+
+  const handleMouseLeaveList = () => {
+    if (!isFinePointer) return;
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    setActiveSlug(null);
+  };
+
+  const handleFocus = (slug: string) => {
+    setActiveSlug(slug);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent, slug: string) => {
+    if (e.key === 'Escape') {
+      setActiveSlug(null);
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setActiveSlug((prev) => (prev === slug ? null : slug));
+    }
+  };
+
+  const handleToggleClick = (slug: string) => {
+    setActiveSlug((prev) => (prev === slug ? null : slug));
+  };
 
   return (
     <Section id="work" ariaLabelledBy="work-heading">
       <Container>
         <SectionHeading id="work-heading" number="02 /" title="SELECTED WORK" />
 
-        <div className="border-t border-border">
-          {/* Featured Project: Expanded Case Study Row */}
-          <FadeUp>
-            <div className="group py-10 sm:py-14 border-b border-border transition-colors hover:bg-secondary/30">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                {/* Index & Title */}
-                <div className="lg:col-span-5 space-y-4">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs uppercase tracking-widest text-primary font-semibold">
-                      01 / FEATURED CASE STUDY
-                    </span>
-                    <span className="font-mono text-xs text-muted-foreground">
-                      2026
-                    </span>
-                  </div>
+        <div
+          onMouseLeave={handleMouseLeaveList}
+          className="border-t border-border divide-y divide-border/60"
+        >
+          {projects.map((project, idx) => {
+            const indexNumber = String(idx + 1).padStart(2, '0');
+            const isOpen = activeSlug === project.slug;
+            const isDimmed = activeSlug !== null && !isOpen;
 
-                  <h3 className="font-anton text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-foreground group-hover:text-primary transition-colors">
-                    {featured.title}
-                  </h3>
-
-                  <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">
-                    ROLE: {featured.role}
-                  </div>
-                </div>
-
-                {/* Details & Architecture Decisions */}
-                <div className="lg:col-span-7 space-y-6">
-                  <div>
-                    <h4 className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-2">
-                      SYSTEM ARCHITECTURE &amp; SUMMARY
-                    </h4>
-                    <p className="text-base sm:text-lg text-foreground leading-relaxed">
-                      {featured.summary}
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-border/40 text-sm">
-                    <div>
-                      <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground block mb-1">
-                        KEY DECISION 01
-                      </span>
-                      <p className="text-muted-foreground">
-                        Dexie.js indexed storage handles offline transactions with immediate local availability.
-                      </p>
-                    </div>
-                    <div>
-                      <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground block mb-1">
-                        KEY DECISION 02
-                      </span>
-                      <p className="text-muted-foreground">
-                        PostgreSQL Row Level Security verifies identity before reconciling background sync queues.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-border/40 flex flex-wrap items-center justify-between gap-4">
-                    <div className="font-mono text-xs text-muted-foreground">
-                      STACK: <span className="text-foreground">{featured.stack.join(' · ')}</span>
-                    </div>
-                    <div className="font-mono text-xs text-primary">
-                      {"{{PROJECT_COVER_FINANCE}}"}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </FadeUp>
-
-          {/* Remaining Projects: Ruled Index Rows */}
-          {otherProjects.map((project, idx) => {
-            const indexNumber = String(idx + 2).padStart(2, '0');
             return (
-              <FadeUp key={project.slug} delay={(idx + 1) * 0.05}>
-                <div className="group py-8 sm:py-10 border-b border-border transition-colors hover:bg-secondary/30">
+              <div
+                key={project.slug}
+                onMouseEnter={() => handleMouseEnter(project.slug)}
+                className={cn(
+                  'transition-opacity duration-200 py-6 sm:py-8',
+                  isDimmed ? 'opacity-50' : 'opacity-100',
+                  prefersReducedMotion && 'transition-none'
+                )}
+              >
+                {/* Collapsed Row Header: exactly matches the original layout */}
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  aria-controls={`details-${project.slug}`}
+                  onClick={() => handleToggleClick(project.slug)}
+                  onFocus={() => handleFocus(project.slug)}
+                  onKeyDown={(e) => handleKeyDown(e, project.slug)}
+                  className="w-full text-left cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none py-1 group"
+                >
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-baseline">
                     {/* Index & Title */}
                     <div className="lg:col-span-4 flex items-baseline gap-4">
-                      <span className="font-mono text-xs text-primary select-none shrink-0">
+                      <span
+                        className={cn(
+                          'font-mono text-xs select-none shrink-0 transition-colors duration-150',
+                          isOpen ? 'text-primary font-semibold' : 'text-primary'
+                        )}
+                      >
                         {indexNumber}
                       </span>
                       <div>
-                        <h3 className="font-anton text-2xl sm:text-3xl uppercase tracking-tight text-foreground group-hover:text-primary transition-colors">
+                        <h3
+                          className={cn(
+                            'font-anton text-2xl sm:text-3xl uppercase tracking-tight transition-colors duration-150',
+                            isOpen ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                          )}
+                        >
                           {project.title}
                         </h3>
                         {project.team && (
@@ -121,12 +144,62 @@ export function Work() {
                         {project.stack.join(' · ')}
                       </div>
                       <div className="font-mono text-[11px] text-muted-foreground mt-1">
-                        {project.textOnly ? 'SYSTEM SPEC' : 'PROTOTYPE'}
+                        {project.textOnly ? 'SYSTEM SPEC' : '2026'}
                       </div>
                     </div>
                   </div>
+                </button>
+
+                {/* Expanded Details Area: Smooth expand & stagger */}
+                <div
+                  id={`details-${project.slug}`}
+                  className={cn(
+                    'grid overflow-hidden transition-[grid-template-rows] duration-500 ease-out',
+                    isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
+                    prefersReducedMotion && 'transition-none duration-0'
+                  )}
+                >
+                  <div className="min-h-0">
+                    <div
+                      className={cn(
+                        'pt-6 mt-4 border-t border-border/40 pl-8 sm:pl-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start transition-all duration-300',
+                        isOpen
+                          ? 'opacity-100 translate-y-0'
+                          : 'opacity-0 -translate-y-2 pointer-events-none',
+                        prefersReducedMotion && 'transition-none duration-0 translate-y-0 opacity-100'
+                      )}
+                    >
+                      <div className="lg:col-span-8 space-y-4">
+                        {project.role && (
+                          <div className="font-mono text-xs text-muted-foreground uppercase">
+                            Role: <span className="text-foreground">{project.role}</span>
+                          </div>
+                        )}
+
+                        <p className="text-sm sm:text-base text-foreground leading-relaxed">
+                          {project.summary}
+                        </p>
+
+                        <div className="font-mono text-xs text-muted-foreground">
+                          <span className="text-primary uppercase tracking-wider block mb-1">
+                            Technical Stack
+                          </span>
+                          <span className="text-foreground">{project.stack.join('   /   ')}</span>
+                        </div>
+                      </div>
+
+                      {project.featured && (
+                        <div className="lg:col-span-4 font-mono text-xs text-muted-foreground border-l border-border/40 pl-4">
+                          <span className="text-primary block mb-1">{"{{PROJECT_COVER_FINANCE}}"}</span>
+                          <span className="text-[11px]">
+                            Offline sync engine and PostgreSQL Row Level Security
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </FadeUp>
+              </div>
             );
           })}
         </div>
