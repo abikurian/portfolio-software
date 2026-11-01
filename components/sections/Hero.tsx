@@ -8,6 +8,14 @@ import { Button } from '@/components/ui/Button';
 import { KineticGrid } from '@/components/ui/kinetic-grid';
 import { useLenis } from '@/components/providers/SmoothScroll';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { IBM_Plex_Sans } from 'next/font/google';
+import { cn } from '@/lib/utils';
+
+const ibmPlexSansHeroBtn = IBM_Plex_Sans({
+  weight: '500',
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export function Hero() {
   const { scrollTo } = useLenis();
@@ -104,7 +112,10 @@ export function Hero() {
               <Button
                 size="md"
                 onClick={() => scrollTo('#work')}
-                className="flex items-center gap-2 group"
+                className={cn(
+                  ibmPlexSansHeroBtn.className,
+                  'normal-case tracking-[0.01em] text-[0.95rem] flex items-center gap-2 group'
+                )}
               >
                 <span>View work</span>
                 <ArrowDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1.5 motion-reduce:group-hover:translate-x-0" />
@@ -114,7 +125,10 @@ export function Hero() {
                 variant="outline"
                 size="md"
                 onClick={() => scrollTo('#contact')}
-                className="flex items-center gap-2 group"
+                className={cn(
+                  ibmPlexSansHeroBtn.className,
+                  'normal-case tracking-[0.01em] text-[0.95rem] flex items-center gap-2 group'
+                )}
               >
                 <span>Get in touch</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1.5 motion-reduce:group-hover:translate-x-0" />
