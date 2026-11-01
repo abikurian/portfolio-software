@@ -50,10 +50,11 @@ export function Experience() {
   return (
     <Section id="experience" ariaLabelledBy="experience-heading">
       <Container>
-        <SectionHeading id="experience-heading" title="EXPERIENCE &amp; EDUCATION" />
-
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="col-span-12 xl:col-span-9">
+          {/* Section heading & content in columns 1 to 9 */}
+          <div className="col-span-12 xl:col-span-9 xl:col-start-1">
+            <SectionHeading id="experience-heading" title="EXPERIENCE &amp; EDUCATION" />
+
             <div ref={timelineRef} className="relative border-t border-border pt-8">
               {/* ScrubLine hairline on the left */}
               <div className="hidden sm:block absolute left-0 top-8 bottom-0 w-[1px] bg-border/40">
@@ -153,7 +154,8 @@ export function Experience() {
             </div>
           </div>
 
-          <BigCounter value={currentNum} label={currentLabel} />
+          {/* Right numeral at xl (columns 10 to 12) */}
+          <BigCounter value={currentNum} label={currentLabel} side="right" />
         </div>
       </Container>
     </Section>

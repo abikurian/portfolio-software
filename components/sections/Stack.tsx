@@ -44,11 +44,15 @@ export function Stack() {
   return (
     <Section id="skills" ariaLabelledBy="skills-heading">
       <Container>
-        <SectionHeading id="skills-heading" title="SKILLS" />
-
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="col-span-12 xl:col-span-9">
-            {/* Spec Sheet Layout: Interactive hover list per task 6 */}
+          {/* Left numeral at xl (columns 1 to 3) */}
+          <BigCounter value={currentNum} label={currentLabel} side="left" />
+
+          {/* Section heading & content in columns 4 to 12 */}
+          <div className="col-span-12 xl:col-span-9 xl:col-start-4">
+            <SectionHeading id="skills-heading" title="SKILLS" />
+
+            {/* Spec Sheet Layout: Interactive hover list */}
             <div
               className="border-t border-border"
               onMouseLeave={() => setHoveredIdx(null)}
@@ -108,8 +112,6 @@ export function Stack() {
               <span>SPEC SHEET: ALL ENVIRONMENTS &amp; FRAMEWORKS</span>
             </div>
           </div>
-
-          <BigCounter value={currentNum} label={currentLabel} />
         </div>
       </Container>
     </Section>

@@ -38,24 +38,28 @@ export function About() {
   return (
     <Section id="about" ariaLabelledBy="about-heading">
       <Container>
-        <SectionHeading id="about-heading" title="ABOUT" />
-
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="col-span-12 xl:col-span-9 max-w-[65ch] space-y-8 text-foreground/90 text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.5]">
-            <FadeUp>
-              <p ref={p1Ref}>
-                I&apos;m a Computer Science student at SNGCE, Kochi, building full-stack Progressive Web Apps with secure backends in PostgreSQL and Firebase. I like understanding a system well enough to explain why it was built the way it was.
-              </p>
-            </FadeUp>
+          {/* Left numeral at xl (columns 1 to 3) */}
+          <BigCounter value={currentNum} label="About" side="left" />
 
-            <FadeUp delay={0.06}>
-              <p ref={p2Ref}>
-                Most of my work sits where data has to stay correct. A finance tracker that syncs offline changes to the cloud without losing parity, protected by Row Level Security. A campus bus tracker that uses a geolocation algorithm to decide how often it syncs.
-              </p>
-            </FadeUp>
+          {/* Section heading & content in columns 4 to 12 */}
+          <div className="col-span-12 xl:col-span-9 xl:col-start-4">
+            <SectionHeading id="about-heading" title="ABOUT" />
+
+            <div className="max-w-[65ch] space-y-8 text-foreground/90 text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.5]">
+              <FadeUp>
+                <p ref={p1Ref}>
+                  I&apos;m a Computer Science student at SNGCE, Kochi, building full-stack Progressive Web Apps with secure backends in PostgreSQL and Firebase. I like understanding a system well enough to explain why it was built the way it was.
+                </p>
+              </FadeUp>
+
+              <FadeUp delay={0.06}>
+                <p ref={p2Ref}>
+                  Most of my work sits where data has to stay correct. A finance tracker that syncs offline changes to the cloud without losing parity, protected by Row Level Security. A campus bus tracker that uses a geolocation algorithm to decide how often it syncs.
+                </p>
+              </FadeUp>
+            </div>
           </div>
-
-          <BigCounter value={currentNum} label="About" />
         </div>
       </Container>
     </Section>
