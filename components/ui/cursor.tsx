@@ -33,58 +33,95 @@ export function CursorFollower() {
 
     // Center offset based on 36px base size
     const BASE_SIZE = 36;
-    const xTo = gsap.quickTo(ring, 'x', { duration: 0.35, ease: 'power3.out' });
-    const yTo = gsap.quickTo(ring, 'y', { duration: 0.35, ease: 'power3.out' });
+    let xTo: ((value: number) => void) | null = null;
+    let yTo: ((value: number) => void) | null = null;
+
+    try {
+      xTo = gsap.quickTo(ring, 'x', { duration: 0.35, ease: 'power3.out' });
+      yTo = gsap.quickTo(ring, 'y', { duration: 0.35, ease: 'power3.out' });
+    } catch (e) {
+      console.error('Failed to init quickTo:', e);
+    }
 
     // Set initial position off-screen
-    gsap.set(ring, { xPercent: -50, yPercent: -50, opacity: 0 });
+    try {
+      gsap.set(ring, { xPercent: -50, yPercent: -50, opacity: 0 });
+    } catch (e) {
+      console.error('Failed to set initial cursor position:', e);
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
-      gsap.to(ring, { opacity: 1, duration: 0.2 });
-      xTo(e.clientX);
-      yTo(e.clientY);
+      try {
+        if (!ring) return;
+        gsap.to(ring, { opacity: 1, duration: 0.2 });
+        if (xTo && yTo) {
+          xTo(e.clientX);
+          yTo(e.clientY);
+        }
 
-      // Check if hovering over links, buttons, or project rows
-      const target = e.target as HTMLElement | null;
-      const interactive = target?.closest('a, button, [role="button"], input, select, textarea');
+        // Check if hovering over links, buttons, or project rows
+        const target = e.target as HTMLElement | null;
+        if (!target) return;
+        const interactive = target.closest?.('a, button, [role="button"], input, select, textarea');
 
-      if (interactive && !isHoveringTarget) {
-        isHoveringTarget = true;
-        gsap.to(ring, {
-          width: 64,
-          height: 64,
-          backgroundColor: 'hsl(var(--primary) / 0.12)',
-          borderColor: 'hsl(var(--primary) / 0.8)',
-          duration: 0.3,
-          ease: 'power3.out',
-        });
-      } else if (!interactive && isHoveringTarget) {
-        isHoveringTarget = false;
-        gsap.to(ring, {
-          width: BASE_SIZE,
-          height: BASE_SIZE,
-          backgroundColor: 'transparent',
-          borderColor: 'hsl(var(--foreground) / 0.6)',
-          duration: 0.3,
-          ease: 'power3.out',
-        });
+        if (interactive && !isHoveringTarget) {
+          isHoveringTarget = true;
+          ring.classList.add('cursor-hover');
+          gsap.to(ring, {
+            width: 64,
+            height: 64,
+            duration: 0.3,
+            ease: 'power3.out',
+          });
+        } else if (!interactive && isHoveringTarget) {
+          isHoveringTarget = false;
+          ring.classList.remove('cursor-hover');
+          gsap.to(ring, {
+            width: BASE_SIZE,
+            height: BASE_SIZE,
+            duration: 0.3,
+            ease: 'power3.out',
+          });
+        }
+      } catch (err) {
+        console.error('Cursor mousemove error:', err);
       }
     };
 
     const handleMouseDown = () => {
-      gsap.to(ring, { scale: 0.8, duration: 0.15, ease: 'power2.out' });
+      try {
+        if (!ring) return;
+        gsap.to(ring, { scale: 0.8, duration: 0.15, ease: 'power2.out' });
+      } catch (e) {
+        console.error('Cursor mousedown error:', e);
+      }
     };
 
     const handleMouseUp = () => {
-      gsap.to(ring, { scale: 1, duration: 0.25, ease: 'back.out(2)' });
+      try {
+        if (!ring) return;
+        gsap.to(ring, { scale: 1, duration: 0.25, ease: 'back.out(2)' });
+      } catch (e) {
+        console.error('Cursor mouseup error:', e);
+      }
     };
 
     const handleMouseLeave = () => {
-      gsap.to(ring, { opacity: 0, duration: 0.25 });
+      try {
+        if (!ring) return;
+        gsap.to(ring, { opacity: 0, duration: 0.25 });
+      } catch (e) {
+        console.error('Cursor mouseleave error:', e);
+      }
     };
 
     const handleMouseEnter = () => {
-      gsap.to(ring, { opacity: 1, duration: 0.25 });
+      try {
+        if (!ring) return;
+        gsap.to(ring, { opacity: 1, duration: 0.25 });
+      } catch (e) {
+        console.error('Cursor mouseenter error:', e);
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -108,7 +145,7 @@ export function CursorFollower() {
     <div
       ref={ringRef}
       aria-hidden="true"
-      className="pointer-events-none fixed top-0 left-0 z-[99999] border border-foreground/60 mix-blend-difference will-change-transform"
+      className="pointer-events-none fixed top-0 left-0 z-[99999] border border-foreground/60 bg-transparent mix-blend-difference will-change-transform transition-[background-color,border-color] duration-300 [&.cursor-hover]:bg-primary/15 [&.cursor-hover]:border-primary/80"
       style={{
         width: 36,
         height: 36,

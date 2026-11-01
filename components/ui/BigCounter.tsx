@@ -24,9 +24,11 @@ export interface BigCounterProps {
   className?: string;
 }
 
-export function BigCounter({ value, label, side = 'right', className }: BigCounterProps) {
+export function BigCounter({ value = '01', label = '', side = 'right', className }: BigCounterProps) {
   const prefersReduced = usePrefersReducedMotion();
 
+  const safeValue = value || '01';
+  const safeLabel = label || '';
   const isLeft = side === 'left';
 
   return (
@@ -42,7 +44,7 @@ export function BigCounter({ value, label, side = 'right', className }: BigCount
       <div className="relative font-anton text-[clamp(6rem,13vw,13rem)] leading-none overflow-hidden h-[1.15em] flex items-center">
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.div
-            key={value}
+            key={safeValue}
             initial={
               prefersReduced
                 ? { opacity: 1, y: 0 }
@@ -51,11 +53,7 @@ export function BigCounter({ value, label, side = 'right', className }: BigCount
             animate={
               prefersReduced
                 ? { opacity: 1, y: 0 }
-                : {
-                    y: '0%',
-                    opacity: 1,
-                    color: ['hsl(var(--primary))', 'transparent'],
-                  }
+                : { y: '0%', opacity: 1 }
             }
             exit={
               prefersReduced
@@ -75,7 +73,7 @@ export function BigCounter({ value, label, side = 'right', className }: BigCount
               color: 'transparent',
             }}
           >
-            {value}
+            {safeValue}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -84,7 +82,7 @@ export function BigCounter({ value, label, side = 'right', className }: BigCount
       <div className={cn('h-6 mt-3 overflow-hidden flex', isLeft ? 'justify-start' : 'justify-end')}>
         <AnimatePresence mode="wait">
           <motion.p
-            key={label}
+            key={safeLabel}
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
@@ -94,7 +92,7 @@ export function BigCounter({ value, label, side = 'right', className }: BigCount
               isLeft ? 'text-left' : 'text-right'
             )}
           >
-            {label}
+            {safeLabel}
           </motion.p>
         </AnimatePresence>
       </div>

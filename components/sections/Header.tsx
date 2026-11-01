@@ -39,8 +39,9 @@ export function Header() {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   // Position highlight over a specific tab element
-  const updateHighlight = useCallback((href: string) => {
-    const el = tabRefs.current[href];
+  const updateHighlight = useCallback((href: string | null) => {
+    if (!href) return;
+    const el = tabRefs.current?.[href];
     if (el) {
       setCursorPos({
         left: el.offsetLeft,

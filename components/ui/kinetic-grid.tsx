@@ -199,9 +199,10 @@ export function KineticGrid({ parentRef, className }: KineticGridProps) {
     let isVisible = true;
 
     const render = () => {
-      if (!isVisible) return;
+      try {
+        if (!isVisible) return;
 
-      ctx.clearRect(0, 0, width, height);
+        ctx.clearRect(0, 0, width, height);
 
       // Update ripples
       for (let i = ripples.length - 1; i >= 0; i--) {
@@ -290,6 +291,9 @@ export function KineticGrid({ parentRef, className }: KineticGridProps) {
       }
 
       ctx.globalAlpha = 1;
+      } catch (err) {
+        console.error('KineticGrid render error:', err);
+      }
       animId = requestAnimationFrame(render);
     };
 

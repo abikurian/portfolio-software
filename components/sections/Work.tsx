@@ -78,8 +78,8 @@ export function Work() {
     setActiveSlug((prev) => (prev === slug ? null : slug));
   };
 
-  const currentCounterNum = String(activeIdx + 1).padStart(2, '0');
-  const currentCounterLabel = projects[activeIdx]?.title || projects[0].title;
+  const currentCounterNum = String(Math.max(1, (activeIdx ?? 0) + 1)).padStart(2, '0');
+  const currentCounterLabel = (projects?.[activeIdx] ?? projects?.[0])?.title ?? 'Selected Work';
 
   return (
     <Section id="work" ariaLabelledBy="work-heading">
