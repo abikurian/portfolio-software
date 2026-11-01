@@ -1,26 +1,128 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
+/* ─── Raw design tokens ─── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Engineering dark base — restrained, warm-neutral */
+  --background:        12 8% 4%;
+  --background-light:  12 8% 4%;
+  --foreground:        30 5% 94%;
+  --card:              12 8% 4%;
+  --card-foreground:   30 5% 94%;
+  --muted:             20 5% 12%;
+  --muted-foreground:  25 4% 60%;
+
+  /* Accent — lime-chartreuse */
+  --primary:           72 100% 55%;
+  --primary-foreground:  0 0% 6%;
+
+  /* Surfaces & hairlines */
+  --secondary:         20 5% 10%;
+  --secondary-foreground: 30 5% 94%;
+  --accent:            72 100% 55%;
+  --accent-foreground: 0 0% 6%;
+
+  /* System */
+  --destructive:       0 72% 52%;
+  --destructive-foreground: 0 0% 98%;
+  --border:            20 4% 18%;
+  --input:             20 4% 18%;
+  --ring:              72 100% 55%;
+  --radius:            0px; /* Square corners per section 12.1 */
 }
 
+/* ─── Tailwind 4 theme wiring ─── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --color-background:           hsl(var(--background));
+  --color-background-light:     hsl(var(--background-light));
+  --color-foreground:           hsl(var(--foreground));
+  --color-card:                 hsl(var(--card));
+  --color-card-foreground:      hsl(var(--card-foreground));
+  --color-muted:                hsl(var(--muted));
+  --color-muted-foreground:     hsl(var(--muted-foreground));
+  --color-primary:              hsl(var(--primary));
+  --color-primary-foreground:   hsl(var(--primary-foreground));
+  --color-secondary:            hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-accent:               hsl(var(--accent));
+  --color-accent-foreground:    hsl(var(--accent-foreground));
+  --color-destructive:          hsl(var(--destructive));
+  --color-border:               hsl(var(--border));
+  --color-input:                hsl(var(--input));
+  --color-ring:                 hsl(var(--ring));
+
+  /* Fonts */
+  --font-anton:        var(--font-anton);
+  --font-roboto:       var(--font-roboto-flex);
+  --font-mono:         var(--font-mono);
+
+  /* Border radius: square */
+  --radius-sm:  0px;
+  --radius-md:  0px;
+  --radius-lg:  0px;
+
+  /* Spacing */
+  --spacing-section: 200px;
+
+  /* Breakpoints */
+  --breakpoint-xs: 420px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─── Custom utilities ─── */
+@utility py-section {
+  padding-top: var(--spacing-section);
+  padding-bottom: var(--spacing-section);
+}
+
+@utility container-pad {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* ─── Base styles ─── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-radius: 0 !important; /* Enforce square corners per 12.1 */
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  html {
+    color-scheme: dark;
+    scroll-behavior: auto; /* Lenis handles smooth scroll */
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-roboto-flex), system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    min-height: 100dvh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
 }
