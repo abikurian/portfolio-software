@@ -20,8 +20,8 @@ export function About() {
         <SectionHeading id="about-heading" number="01 /" title="ABOUT" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          {/* Left: Three verbatim paragraphs */}
-          <div className="lg:col-span-7 space-y-6 text-foreground/90 text-base sm:text-lg leading-relaxed">
+          {/* Left: Three verbatim paragraphs at clamp text size */}
+          <div className="lg:col-span-8 space-y-8 text-foreground/90 text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.5] max-w-[65ch]">
             <FadeUp>
               <p>
                 I&apos;m a Computer Science student at SNGCE, Kochi, building full-stack Progressive Web Apps with secure backends in PostgreSQL and Firebase. I like understanding a system well enough to explain why it was built the way it was.
@@ -42,7 +42,7 @@ export function About() {
           </div>
 
           {/* Right: Quick Facts block */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-4">
             <FadeUp delay={0.1}>
               <div className="border-t border-border pt-4">
                 <h3 className="font-mono text-xs uppercase tracking-widest text-primary mb-6">
