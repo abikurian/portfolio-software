@@ -8,12 +8,14 @@ type LenisContextValue = {
   scrollTo: (target: string | number | HTMLElement) => void;
   stop: () => void;
   start: () => void;
+  resize: () => void;
 };
 
 const LenisContext = createContext<LenisContextValue>({
   scrollTo: () => {},
   stop: () => {},
   start: () => {},
+  resize: () => {},
 });
 
 export function useLenis() {
@@ -34,6 +36,9 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       smoothWheel: true,
     });
     lenisRef.current = lenis;
+    if (typeof window !== 'undefined') {
+      (window as unknown as { lenis?: Lenis }).lenis = lenis;
+    }
 
     lenis.on('scroll', ScrollTrigger.update);
     const tick = (time: number) => lenis.raf(time * 1000);
@@ -44,6 +49,9 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       gsap.ticker.remove(tick);
       lenis.destroy();
       lenisRef.current = null;
+      if (typeof window !== 'undefined') {
+        delete (window as unknown as { lenis?: Lenis }).lenis;
+      }
     };
   }, []);
 
@@ -52,7 +60,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       lenisRef.current.scrollTo(target as string, {
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        offset: -80, // account for fixed header offset
+        offset: -88,
       });
     } else {
       if (typeof target === 'string') {
@@ -74,8 +82,12 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     lenisRef.current?.start();
   };
 
+  const resize = () => {
+    lenisRef.current?.resize();
+  };
+
   return (
-    <LenisContext.Provider value={{ scrollTo, stop, start }}>
+    <LenisContext.Provider value={{ scrollTo, stop, start, resize }}>
       {children}
     </LenisContext.Provider>
   );

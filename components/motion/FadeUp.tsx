@@ -48,7 +48,7 @@ export function FadeUp({
         }
       );
     },
-    { scope: ref }
+    { scope: ref, dependencies: [] }
   );
 
   return (

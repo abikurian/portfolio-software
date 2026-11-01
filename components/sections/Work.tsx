@@ -7,6 +7,7 @@ import { Section } from '@/components/ui/Section';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { BigCounter } from '@/components/ui/BigCounter';
 import { FadeUp } from '@/components/motion/FadeUp';
+import { useLenis } from '@/components/providers/SmoothScroll';
 import { projects } from '@/lib/data/projects';
 import { cn } from '@/lib/utils';
 
@@ -35,6 +36,7 @@ function usePrefersReducedMotion() {
 }
 
 export function Work() {
+  const { resize } = useLenis();
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [activeIdx, setActiveIdx] = useState(0);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -82,10 +84,11 @@ export function Work() {
   return (
     <Section id="work" ariaLabelledBy="work-heading">
       <Container>
-        <SectionHeading id="work-heading" title="SELECTED WORK" />
-
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="col-span-12 xl:col-span-9">
+          {/* Section heading & content in columns 1 to 9 */}
+          <div className="col-span-12 xl:col-span-9 xl:col-start-1">
+            <SectionHeading id="work-heading" title="SELECTED WORK" />
+
             <div
               onMouseLeave={handleMouseLeaveList}
               className="border-t border-border divide-y divide-border/60"
@@ -146,6 +149,11 @@ export function Work() {
                       {/* Expanded Details Area: Clean flush left alignment with full description */}
                       <div
                         id={`details-${project.slug}`}
+                        onTransitionEnd={(e) => {
+                          if (e.propertyName === 'grid-template-rows') {
+                            resize();
+                          }
+                        }}
                         className={cn(
                           'grid overflow-hidden transition-[grid-template-rows] duration-500 ease-out',
                           isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
@@ -195,7 +203,8 @@ export function Work() {
             </div>
           </div>
 
-          <BigCounter value={currentCounterNum} label={currentCounterLabel} />
+          {/* Right numeral at xl (columns 10 to 12) */}
+          <BigCounter value={currentCounterNum} label={currentCounterLabel} side="right" />
         </div>
       </Container>
     </Section>
