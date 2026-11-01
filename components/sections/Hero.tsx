@@ -49,13 +49,13 @@ export function Hero() {
       ref={heroRef}
       id="hero"
       aria-label="Introduction"
-      className="relative min-h-[80vh] flex flex-col justify-center pt-24 md:pt-32 pb-16 border-b border-border/80 overflow-hidden"
+      className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 border-b border-border/80 overflow-hidden"
     >
       {/* Kinetic grid background (pointer-events none, behind content) */}
       <KineticGrid parentRef={heroRef} />
 
-      <Container className="my-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-6 lg:gap-y-8">
+      <Container className="relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-[clamp(1rem,2vw,2rem)]">
           {/* Title on two balanced lines spanning width */}
           <div className="col-span-12">
             <h1
@@ -88,7 +88,7 @@ export function Hero() {
           {/* Role, Subline, CTAs sit in a tighter column group beneath it, aligned to the same grid */}
           <div ref={contentRef} className="col-span-12 lg:col-span-7 xl:col-span-6 space-y-4">
             <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-primary mb-2">
+              <p className="font-mono text-xs uppercase tracking-widest text-primary mb-1.5">
                 ROLE
               </p>
               <p className="text-xl sm:text-2xl text-foreground font-medium">
