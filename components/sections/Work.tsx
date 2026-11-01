@@ -93,7 +93,7 @@ export function Work() {
                   prefersReducedMotion && 'transition-none'
                 )}
               >
-                {/* Collapsed Row Header: exactly matches the original layout */}
+                {/* Collapsed Row Header: 100ms scale-down press and release */}
                 <button
                   type="button"
                   aria-expanded={isOpen}
@@ -101,7 +101,7 @@ export function Work() {
                   onClick={() => handleToggleClick(project.slug)}
                   onFocus={() => handleFocus(project.slug)}
                   onKeyDown={(e) => handleKeyDown(e, project.slug)}
-                  className="w-full text-left cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none py-1 group"
+                  className="w-full text-left cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none py-1 group transition-transform duration-100 ease-out active:scale-[0.99] motion-reduce:active:scale-100 motion-reduce:transition-none select-none"
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-baseline">
                     {/* Index & Title */}

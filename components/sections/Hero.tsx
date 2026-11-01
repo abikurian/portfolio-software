@@ -104,20 +104,20 @@ export function Hero() {
               <Button
                 size="md"
                 onClick={() => scrollTo('#work')}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 group"
               >
                 <span>View work</span>
-                <ArrowDown className="w-3.5 h-3.5" />
+                <ArrowDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1.5 motion-reduce:group-hover:translate-x-0" />
               </Button>
 
               <Button
                 variant="outline"
                 size="md"
                 onClick={() => scrollTo('#contact')}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 group"
               >
                 <span>Get in touch</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1.5 motion-reduce:group-hover:translate-x-0" />
               </Button>
             </div>
           </div>

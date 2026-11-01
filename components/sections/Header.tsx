@@ -106,10 +106,10 @@ export function Header() {
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={cn(
                   ibmPlexMonoNav.className,
-                  'text-xs tracking-wider uppercase transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none py-1 border-b',
+                  'relative text-xs tracking-wider uppercase transition-colors duration-150 py-1 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none after:content-[\'\'] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-primary after:origin-left after:transition-transform after:duration-250 after:ease-out motion-reduce:after:transition-none',
                   isActive
-                    ? 'text-primary border-primary font-medium'
-                    : 'text-muted-foreground border-transparent hover:text-foreground font-normal'
+                    ? 'text-primary font-medium after:scale-x-100'
+                    : 'text-muted-foreground hover:text-primary font-normal after:scale-x-0 hover:after:scale-x-100'
                 )}
               >
                 {link.label}
@@ -124,7 +124,7 @@ export function Header() {
           aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
           aria-expanded={mobileMenuOpen}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-foreground hover:text-primary transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+          className="md:hidden p-2 text-foreground hover:text-primary transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>

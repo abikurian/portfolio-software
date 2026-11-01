@@ -38,7 +38,7 @@ export function Contact() {
               <div className="space-y-4">
                 <a
                   href={`mailto:${email}`}
-                  className="font-anton text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground hover:text-primary transition-colors tracking-tight break-all leading-tight block"
+                  className="font-anton text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground hover:text-primary transition-colors duration-150 tracking-tight break-all leading-tight block focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
                 >
                   {email}
                 </a>
@@ -47,7 +47,7 @@ export function Contact() {
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className="inline-flex items-center gap-2 px-4 py-2 border border-border hover:border-primary text-foreground text-xs font-mono uppercase tracking-wider transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                    className="inline-flex items-center gap-2 px-4 py-2 border border-border hover:border-primary text-foreground text-xs font-mono uppercase tracking-wider transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none active:scale-[0.97]"
                     aria-label="Copy email address to clipboard"
                   >
                     {copied ? (
@@ -82,7 +82,7 @@ export function Contact() {
             </FadeUp>
           </div>
 
-          {/* Right: Channels */}
+          {/* Right: Channels with text-roll micro-interaction */}
           <div className="lg:col-span-4 space-y-8">
             <FadeUp delay={0.1}>
               <span className="font-mono text-xs uppercase tracking-widest text-primary block mb-4">
@@ -94,20 +94,34 @@ export function Contact() {
                   href="https://linkedin.com/in/abi-kurian-varghese"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between py-3 text-foreground hover:text-primary transition-colors group"
+                  className="flex items-center justify-between py-3 text-foreground hover:text-primary transition-colors duration-150 group focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
                 >
-                  <span className="uppercase">LinkedIn</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <span className="relative inline-block overflow-hidden h-[1.3em]">
+                    <span className="block uppercase transition-transform duration-300 ease-out group-hover:-translate-y-full motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
+                      LinkedIn
+                    </span>
+                    <span className="absolute top-full left-0 block uppercase text-primary transition-transform duration-300 ease-out group-hover:-translate-y-full motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
+                      LinkedIn
+                    </span>
+                  </span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-transform duration-200 group-hover:translate-x-1.5 group-hover:-translate-y-0.5 motion-reduce:group-hover:translate-x-0" />
                 </a>
 
                 <a
                   href="https://github.com/abikurian"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between py-3 text-foreground hover:text-primary transition-colors group"
+                  className="flex items-center justify-between py-3 text-foreground hover:text-primary transition-colors duration-150 group focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
                 >
-                  <span className="uppercase">GitHub</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <span className="relative inline-block overflow-hidden h-[1.3em]">
+                    <span className="block uppercase transition-transform duration-300 ease-out group-hover:-translate-y-full motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
+                      GitHub
+                    </span>
+                    <span className="absolute top-full left-0 block uppercase text-primary transition-transform duration-300 ease-out group-hover:-translate-y-full motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
+                      GitHub
+                    </span>
+                  </span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-transform duration-200 group-hover:translate-x-1.5 group-hover:-translate-y-0.5 motion-reduce:group-hover:translate-x-0" />
                 </a>
               </div>
             </FadeUp>

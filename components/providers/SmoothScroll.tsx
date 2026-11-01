@@ -23,7 +23,12 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) return;
 
-    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    const lenis = new Lenis({
+      lerp: 0.08,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
     lenisRef.current = lenis;
 
     lenis.on('scroll', ScrollTrigger.update);
@@ -40,7 +45,11 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
   const scrollTo = (target: string | number | HTMLElement) => {
     if (lenisRef.current) {
-      lenisRef.current.scrollTo(target as string, { duration: 1.2 });
+      lenisRef.current.scrollTo(target as string, {
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        offset: 0,
+      });
     } else {
       if (typeof target === 'string') {
         const el = document.querySelector(target);
