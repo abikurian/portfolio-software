@@ -82,7 +82,7 @@ export function Contact() {
             </FadeUp>
           </div>
 
-          {/* Right: Channels & Resume */}
+          {/* Right: Channels */}
           <div className="lg:col-span-4 space-y-8">
             <FadeUp delay={0.1}>
               <span className="font-mono text-xs uppercase tracking-widest text-primary block mb-4">
@@ -109,11 +109,6 @@ export function Contact() {
                   <span className="uppercase">GitHub</span>
                   <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
-
-                <div className="flex items-center justify-between py-3 text-muted-foreground">
-                  <span className="uppercase">Resume PDF</span>
-                  <span className="text-primary font-semibold">{"{{RESUME_PDF}}"}</span>
-                </div>
               </div>
             </FadeUp>
           </div>

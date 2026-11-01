@@ -162,40 +162,29 @@ export function Work() {
                   <div className="min-h-0">
                     <div
                       className={cn(
-                        'pt-6 mt-4 border-t border-border/40 pl-8 sm:pl-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start transition-all duration-300',
+                        'pt-6 mt-4 border-t border-border/40 pl-8 sm:pl-10 space-y-4 max-w-[75ch] transition-all duration-300',
                         isOpen
                           ? 'opacity-100 translate-y-0'
                           : 'opacity-0 -translate-y-2 pointer-events-none',
                         prefersReducedMotion && 'transition-none duration-0 translate-y-0 opacity-100'
                       )}
                     >
-                      <div className="lg:col-span-8 space-y-4">
-                        {project.role && (
-                          <div className="font-mono text-xs text-muted-foreground uppercase">
-                            Role: <span className="text-foreground">{project.role}</span>
-                          </div>
-                        )}
-
-                        <p className="text-sm sm:text-base text-foreground leading-relaxed">
-                          {project.summary}
-                        </p>
-
-                        <div className="font-mono text-xs text-muted-foreground">
-                          <span className="text-primary uppercase tracking-wider block mb-1">
-                            Technical Stack
-                          </span>
-                          <span className="text-foreground">{project.stack.join('   /   ')}</span>
-                        </div>
-                      </div>
-
-                      {project.featured && (
-                        <div className="lg:col-span-4 font-mono text-xs text-muted-foreground border-l border-border/40 pl-4">
-                          <span className="text-primary block mb-1">{"{{PROJECT_COVER_FINANCE}}"}</span>
-                          <span className="text-[11px]">
-                            Offline sync engine and PostgreSQL Row Level Security
-                          </span>
+                      {project.role && (
+                        <div className="font-mono text-xs text-muted-foreground uppercase">
+                          Role: <span className="text-foreground">{project.role}</span>
                         </div>
                       )}
+
+                      <p className="text-sm sm:text-base text-foreground leading-relaxed">
+                        {project.summary}
+                      </p>
+
+                      <div className="font-mono text-xs text-muted-foreground">
+                        <span className="text-primary uppercase tracking-wider block mb-1">
+                          Technical Stack
+                        </span>
+                        <span className="text-foreground">{project.stack.join('   /   ')}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
