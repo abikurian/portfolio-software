@@ -5,6 +5,13 @@ import { useState, useEffect, useRef } from 'react';
 import { useLenis } from '@/components/providers/SmoothScroll';
 import { cn } from '@/lib/utils';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { IBM_Plex_Mono } from 'next/font/google';
+
+const ibmPlexMonoNav = IBM_Plex_Mono({
+  weight: ['400', '500'],
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 const NAV_LINKS = [
   { href: '#about', label: 'About' },
@@ -108,10 +115,11 @@ export function Header() {
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={cn(
-                  'text-xs font-mono tracking-widest uppercase transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none py-1 border-b',
+                  ibmPlexMonoNav.className,
+                  'text-xs tracking-wider uppercase transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none py-1 border-b',
                   isActive
-                    ? 'text-primary border-primary'
-                    : 'text-muted-foreground border-transparent hover:text-foreground'
+                    ? 'text-primary border-primary font-medium'
+                    : 'text-muted-foreground border-transparent hover:text-foreground font-normal'
                 )}
               >
                 {link.label}
@@ -156,10 +164,13 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="flex items-center justify-between text-2xl font-anton tracking-wide uppercase text-foreground hover:text-primary transition-colors py-4 border-b border-border/40"
+                className={cn(
+                  ibmPlexMonoNav.className,
+                  'flex items-center justify-between text-lg tracking-wide uppercase text-foreground hover:text-primary transition-colors py-4 border-b border-border/40 font-normal'
+                )}
               >
                 <span>{link.label}</span>
-                <span className="text-xs font-mono text-muted-foreground">0{idx + 1}</span>
+                <span className="text-xs text-muted-foreground">0{idx + 1}</span>
               </a>
             ))}
             <a
