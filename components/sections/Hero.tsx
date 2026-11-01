@@ -51,13 +51,13 @@ export function Hero() {
       aria-label="Introduction"
       className="relative min-h-[80vh] flex flex-col justify-center pt-24 md:pt-32 pb-16 border-b border-border/80 overflow-hidden"
     >
-      {/* Task 8: Kinetic grid background (pointer-events none, behind content) */}
+      {/* Kinetic grid background (pointer-events none, behind content) */}
       <KineticGrid parentRef={heroRef} />
 
       <Container className="my-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Title on two balanced lines */}
-          <div className="lg:col-span-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-6 lg:gap-y-8">
+          {/* Title on two balanced lines spanning width */}
+          <div className="col-span-12">
             <h1
               ref={titleRef}
               aria-label="ABI KURIAN VARGHESE"
@@ -85,8 +85,8 @@ export function Hero() {
             </h1>
           </div>
 
-          {/* Role, Subline, CTAs */}
-          <div ref={contentRef} className="lg:col-span-4 lg:pt-14 space-y-6">
+          {/* Role, Subline, CTAs sit in a tighter column group beneath it, aligned to the same grid */}
+          <div ref={contentRef} className="col-span-12 lg:col-span-7 xl:col-span-6 space-y-4">
             <div>
               <p className="font-mono text-xs uppercase tracking-widest text-primary mb-2">
                 ROLE

@@ -14,10 +14,10 @@ export function Container({
   return (
     <div
       className={cn(
-        'w-full mx-auto px-4 sm:px-6 md:px-8',
-        size === 'default' && 'max-w-[1148px]',
-        size === 'narrow' && 'max-w-3xl',
-        size === 'wide' && 'max-w-7xl',
+        'w-full mx-auto px-[clamp(1.25rem,4vw,4rem)]',
+        size === 'default' && 'max-w-[1440px]',
+        size === 'narrow' && 'max-w-4xl',
+        size === 'wide' && 'max-w-[1440px]',
         className
       )}
       {...props}
@@ -26,4 +26,3 @@ export function Container({
     </div>
   );
 }
-

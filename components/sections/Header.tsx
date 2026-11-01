@@ -6,6 +6,7 @@ import { useLenis } from '@/components/providers/SmoothScroll';
 import { cn } from '@/lib/utils';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { IBM_Plex_Mono } from 'next/font/google';
+import { Container } from '@/components/ui/Container';
 
 const ibmPlexMonoNav = IBM_Plex_Mono({
   weight: ['400', '500'],
@@ -93,7 +94,7 @@ export function Header() {
           : 'bg-background/95 border-b border-transparent'
       )}
     >
-      <div className="max-w-[1148px] mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-between">
+      <Container className="flex items-center justify-between">
         <a
           href="#"
           onClick={(e) => {
@@ -148,7 +149,7 @@ export function Header() {
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
-      </div>
+      </Container>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
