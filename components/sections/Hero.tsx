@@ -63,13 +63,13 @@ export function Hero() {
       <KineticGrid parentRef={heroRef} />
 
       <Container className="relative z-10 my-auto -translate-y-3 sm:-translate-y-5">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-[clamp(1rem,2vw,2rem)]">
+        <div className="grid grid-cols-1 lg:grid-cols-12">
           {/* At xl the name block spans columns 1 to 9 at most; below that it spans the full width */}
           <div className="col-span-12 xl:col-span-9">
             <h1
               ref={titleRef}
               aria-label="ABI KURIAN VARGHESE"
-              className="font-anton uppercase tracking-tight text-[clamp(2.75rem,9vw,8.5rem)] leading-[0.95] text-balance text-left text-foreground select-none overflow-hidden"
+              className="font-anton uppercase tracking-tight text-[clamp(2.75rem,9vw,8.5rem)] leading-[0.9] text-balance text-left text-foreground select-none overflow-hidden mb-0"
               style={{ overflowWrap: 'anywhere' }}
             >
               <span className="block overflow-hidden">
@@ -91,48 +91,51 @@ export function Hero() {
                 ))}
               </span>
             </h1>
-          </div>
 
-          {/* Role, Subline, CTAs sit in a tighter column group beneath it, aligned to the same grid */}
-          <div ref={contentRef} className="col-span-12 lg:col-span-7 xl:col-span-6 space-y-4">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-primary mb-1.5">
-                ROLE
+            {/* Tight inner spacing: name, role, subline and buttons as one cohesive group */}
+            <div
+              ref={contentRef}
+              className="mt-[clamp(0.75rem,1.5vw,1.5rem)] max-w-2xl"
+            >
+              <div>
+                <p className="font-mono text-xs uppercase tracking-widest text-primary mb-1">
+                  ROLE
+                </p>
+                <p className="text-xl sm:text-2xl text-foreground font-medium leading-snug">
+                  Full-stack developer
+                </p>
+              </div>
+
+              <p className="mt-3 text-base text-muted-foreground leading-relaxed">
+                Computer Science student in Kochi. I build offline-first web apps and work with local AI models.
               </p>
-              <p className="text-xl sm:text-2xl text-foreground font-medium">
-                Full-stack developer
-              </p>
-            </div>
 
-            <p className="text-base text-muted-foreground leading-relaxed">
-              Computer Science student in Kochi. I build offline-first web apps and work with local AI models.
-            </p>
+              <div className="mt-[clamp(1.25rem,2.5vw,2rem)] flex flex-wrap items-center gap-3">
+                <Button
+                  size="md"
+                  onClick={() => scrollTo('#work')}
+                  className={cn(
+                    ibmPlexSansHeroBtn.className,
+                    'normal-case tracking-[0.01em] text-[0.95rem] flex items-center gap-2 group'
+                  )}
+                >
+                  <span>View work</span>
+                  <ArrowDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1.5 motion-reduce:group-hover:translate-x-0" />
+                </Button>
 
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <Button
-                size="md"
-                onClick={() => scrollTo('#work')}
-                className={cn(
-                  ibmPlexSansHeroBtn.className,
-                  'normal-case tracking-[0.01em] text-[0.95rem] flex items-center gap-2 group'
-                )}
-              >
-                <span>View work</span>
-                <ArrowDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1.5 motion-reduce:group-hover:translate-x-0" />
-              </Button>
-
-              <Button
-                variant="outline"
-                size="md"
-                onClick={() => scrollTo('#contact')}
-                className={cn(
-                  ibmPlexSansHeroBtn.className,
-                  'normal-case tracking-[0.01em] text-[0.95rem] flex items-center gap-2 group'
-                )}
-              >
-                <span>Get in touch</span>
-                <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1.5 motion-reduce:group-hover:translate-x-0" />
-              </Button>
+                <Button
+                  variant="outline"
+                  size="md"
+                  onClick={() => scrollTo('#contact')}
+                  className={cn(
+                    ibmPlexSansHeroBtn.className,
+                    'normal-case tracking-[0.01em] text-[0.95rem] flex items-center gap-2 group'
+                  )}
+                >
+                  <span>Get in touch</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1.5 motion-reduce:group-hover:translate-x-0" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
