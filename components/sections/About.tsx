@@ -10,7 +10,7 @@ export function About() {
   return (
     <Section id="about" ariaLabelledBy="about-heading">
       <Container>
-        <SectionHeading id="about-heading" number="01 /" title="ABOUT" />
+        <SectionHeading id="about-heading" title="ABOUT" />
 
         <div className="max-w-[65ch] space-y-8 text-foreground/90 text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.5]">
           <FadeUp>

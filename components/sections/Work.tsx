@@ -72,14 +72,13 @@ export function Work() {
   return (
     <Section id="work" ariaLabelledBy="work-heading">
       <Container>
-        <SectionHeading id="work-heading" number="02 /" title="SELECTED WORK" />
+        <SectionHeading id="work-heading" title="SELECTED WORK" />
 
         <div
           onMouseLeave={handleMouseLeaveList}
           className="border-t border-border divide-y divide-border/60"
         >
-          {projects.map((project, idx) => {
-            const indexNumber = String(idx + 1).padStart(2, '0');
+          {projects.map((project) => {
             const isOpen = activeSlug === project.slug;
             const isDimmed = activeSlug !== null && !isOpen;
 
@@ -93,7 +92,7 @@ export function Work() {
                   prefersReducedMotion && 'transition-none'
                 )}
               >
-                {/* Collapsed Row Header: 100ms scale-down press and release */}
+                {/* Collapsed Row Header: clean left-aligned title with no index spacing */}
                 <button
                   type="button"
                   aria-expanded={isOpen}
@@ -104,31 +103,21 @@ export function Work() {
                   className="w-full text-left cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none py-1 group transition-transform duration-100 ease-out active:scale-[0.99] motion-reduce:active:scale-100 motion-reduce:transition-none select-none"
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-baseline">
-                    {/* Index & Title */}
-                    <div className="lg:col-span-4 flex items-baseline gap-4">
-                      <span
+                    {/* Title */}
+                    <div className="lg:col-span-4">
+                      <h3
                         className={cn(
-                          'font-mono text-xs select-none shrink-0 transition-colors duration-150',
-                          isOpen ? 'text-primary font-semibold' : 'text-primary'
+                          'font-anton text-2xl sm:text-3xl uppercase tracking-tight transition-colors duration-150',
+                          isOpen ? 'text-primary' : 'text-foreground group-hover:text-primary'
                         )}
                       >
-                        {indexNumber}
-                      </span>
-                      <div>
-                        <h3
-                          className={cn(
-                            'font-anton text-2xl sm:text-3xl uppercase tracking-tight transition-colors duration-150',
-                            isOpen ? 'text-primary' : 'text-foreground group-hover:text-primary'
-                          )}
-                        >
-                          {project.title}
-                        </h3>
-                        {project.team && (
-                          <span className="font-mono text-[11px] text-muted-foreground block mt-1">
-                            {project.team}
-                          </span>
-                        )}
-                      </div>
+                        {project.title}
+                      </h3>
+                      {project.team && (
+                        <span className="font-mono text-[11px] text-muted-foreground block mt-1">
+                          {project.team}
+                        </span>
+                      )}
                     </div>
 
                     {/* Summary */}
@@ -150,7 +139,7 @@ export function Work() {
                   </div>
                 </button>
 
-                {/* Expanded Details Area: Smooth expand & stagger */}
+                {/* Expanded Details Area: Clean flush left alignment */}
                 <div
                   id={`details-${project.slug}`}
                   className={cn(
@@ -162,7 +151,7 @@ export function Work() {
                   <div className="min-h-0">
                     <div
                       className={cn(
-                        'pt-6 mt-4 border-t border-border/40 pl-8 sm:pl-10 space-y-4 max-w-[75ch] transition-all duration-300',
+                        'pt-6 mt-4 border-t border-border/40 space-y-4 max-w-[75ch] transition-all duration-300',
                         isOpen
                           ? 'opacity-100 translate-y-0'
                           : 'opacity-0 -translate-y-2 pointer-events-none',
@@ -193,10 +182,9 @@ export function Work() {
           })}
         </div>
 
-        {/* Footnote per section 4.2 */}
-        <div className="pt-6 font-mono text-xs text-muted-foreground flex flex-col sm:flex-row justify-between gap-2">
+        {/* Footnote */}
+        <div className="pt-6 font-mono text-xs text-muted-foreground">
           <span>Previous portfolios explored Astro, WebGL canvas and brutalist layouts.</span>
-          <span>5 PROJECTS LISTED</span>
         </div>
       </Container>
     </Section>

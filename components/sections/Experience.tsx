@@ -15,7 +15,7 @@ export function Experience() {
   return (
     <Section id="experience" ariaLabelledBy="experience-heading">
       <Container>
-        <SectionHeading id="experience-heading" number="04 /" title="EXPERIENCE &amp; EDUCATION" />
+        <SectionHeading id="experience-heading" title="EXPERIENCE &amp; EDUCATION" />
 
         <div ref={timelineRef} className="relative border-t border-border pt-8">
           {/* Subtle ScrubLine hairline on the left */}

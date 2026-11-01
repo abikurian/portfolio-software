@@ -140,7 +140,7 @@ export function Header() {
           className="fixed inset-0 top-[57px] bg-background z-40 md:hidden flex flex-col px-6 py-8 border-t border-border"
         >
           <nav className="flex flex-col">
-            {NAV_LINKS.map((link, idx) => (
+            {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -151,7 +151,6 @@ export function Header() {
                 )}
               >
                 <span>{link.label}</span>
-                <span className="text-xs text-muted-foreground">0{idx + 1}</span>
               </a>
             ))}
           </nav>

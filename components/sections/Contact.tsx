@@ -25,7 +25,7 @@ export function Contact() {
   return (
     <Section id="contact" ariaLabelledBy="contact-heading" className="pb-24 sm:pb-36">
       <Container>
-        <SectionHeading id="contact-heading" number="05 /" title="CONTACT" />
+        <SectionHeading id="contact-heading" title="CONTACT" />
 
         <div className="border-t border-border pt-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left: Oversized Email Link */}
