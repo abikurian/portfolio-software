@@ -138,7 +138,7 @@ export function Work() {
                           {/* Stack line */}
                           <div className="lg:col-span-6 lg:text-right">
                             {(project.stack ?? []).length > 0 && (
-                              <div className="font-mono text-xs text-foreground/80">
+                              <div className="font-mono text-xs text-foreground/80 break-words [overflow-wrap:anywhere]">
                                 {(project.stack ?? []).join(' · ')}
                               </div>
                             )}
@@ -176,7 +176,7 @@ export function Work() {
                               </div>
                             )}
 
-                            <p className="text-sm sm:text-base text-foreground leading-relaxed">
+                            <p className="text-sm sm:text-base text-foreground leading-relaxed break-words">
                               {project.summary}
                             </p>
 
@@ -185,7 +185,7 @@ export function Work() {
                                 <span className="text-primary uppercase tracking-wider block mb-1">
                                   Technical Stack
                                 </span>
-                                <span className="text-foreground">{(project.stack ?? []).join('   /   ')}</span>
+                                <span className="text-foreground break-words [overflow-wrap:anywhere]">{(project.stack ?? []).join('   /   ')}</span>
                               </div>
                             )}
 

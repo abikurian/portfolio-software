@@ -38,7 +38,7 @@ export function Contact() {
               <div className="space-y-4">
                 <a
                   href={`mailto:${email}`}
-                  className="font-anton text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground hover:text-primary transition-colors duration-150 tracking-tight break-all leading-tight block focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
+                  className="font-anton text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground hover:text-primary transition-colors duration-150 tracking-tight break-all leading-tight block focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
                 >
                   {email}
                 </a>

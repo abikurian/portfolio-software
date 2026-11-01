@@ -70,7 +70,7 @@ export function Hero() {
             <h1
               ref={titleRef}
               aria-label="ABI KURIAN VARGHESE"
-              className="font-anton uppercase tracking-tight text-[clamp(2.75rem,9vw,8.5rem)] leading-[0.9] text-balance text-left text-foreground select-none overflow-hidden mb-0"
+              className="font-anton uppercase tracking-tight text-[clamp(2.25rem,8.5vw,8.5rem)] leading-[0.9] text-balance text-left text-foreground select-none overflow-hidden mb-0"
               style={{ overflowWrap: 'anywhere' }}
             >
               <span className="block overflow-hidden">
@@ -99,13 +99,13 @@ export function Hero() {
                 Computer Science student in Kochi. I build offline-first web apps and work with local AI models.
               </p>
 
-              <div className="mt-[clamp(1.25rem,2.5vw,2rem)] flex flex-wrap items-center gap-3">
+              <div className="mt-[clamp(1.25rem,2.5vw,2rem)] flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
                 <Button
                   size="md"
                   onClick={() => scrollTo('#work')}
                   className={cn(
                     ibmPlexSansHeroBtn.className,
-                    'normal-case tracking-[0.01em] text-[0.95rem] flex items-center gap-2 group'
+                    'w-full sm:w-auto normal-case tracking-[0.01em] text-[0.95rem] flex items-center justify-center gap-2 group'
                   )}
                 >
                   <span>View work</span>
@@ -118,7 +118,7 @@ export function Hero() {
                   onClick={() => scrollTo('#contact')}
                   className={cn(
                     ibmPlexSansHeroBtn.className,
-                    'normal-case tracking-[0.01em] text-[0.95rem] flex items-center gap-2 group'
+                    'w-full sm:w-auto normal-case tracking-[0.01em] text-[0.95rem] flex items-center justify-center gap-2 group'
                   )}
                 >
                   <span>Get in touch</span>
