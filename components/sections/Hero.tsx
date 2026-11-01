@@ -57,7 +57,7 @@ export function Hero() {
       ref={heroRef}
       id="hero"
       aria-label="Introduction"
-      className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 border-b border-border/80 overflow-hidden"
+      className="relative min-h-screen min-h-svh flex flex-col justify-center pt-20 sm:pt-24 pb-12 sm:pb-16 border-b border-border/80 overflow-hidden"
     >
       {/* Kinetic grid background (pointer-events none, behind content) */}
       <KineticGrid parentRef={heroRef} />
