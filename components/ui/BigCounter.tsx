@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { useSyncExternalStore } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 function usePrefersReducedMotion() {
   return useSyncExternalStore(
@@ -19,26 +20,33 @@ function usePrefersReducedMotion() {
 export interface BigCounterProps {
   value: string; // e.g. "01", "02"
   label: string; // e.g. "About", "Smart Yatra"
+  side?: 'left' | 'right';
   className?: string;
 }
 
-export function BigCounter({ value, label, className }: BigCounterProps) {
+export function BigCounter({ value, label, side = 'right', className }: BigCounterProps) {
   const prefersReduced = usePrefersReducedMotion();
+
+  const isLeft = side === 'left';
 
   return (
     <aside
       aria-hidden="true"
-      className={`hidden xl:block col-span-3 col-start-10 sticky top-[22vh] self-start pl-6 select-none pointer-events-none ${className || ''}`}
+      className={cn(
+        'hidden xl:block col-span-3 sticky top-[22vh] self-start select-none pointer-events-none z-10',
+        isLeft ? 'col-start-1 text-left pr-6' : 'col-start-10 text-right pl-6',
+        className
+      )}
     >
-      {/* Numeral overflow-hidden mask */}
-      <div className="relative overflow-hidden h-[1.1em] leading-none">
+      {/* Numeral overflow-hidden container sized with font-anton and clamp font size */}
+      <div className="relative font-anton text-[clamp(6rem,13vw,13rem)] leading-none overflow-hidden h-[1.15em] flex items-center">
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.div
             key={value}
             initial={
               prefersReduced
                 ? { opacity: 1, y: 0 }
-                : { y: '100%', opacity: 0.3 }
+                : { y: '100%', opacity: 0.5 }
             }
             animate={
               prefersReduced
@@ -58,9 +66,12 @@ export function BigCounter({ value, label, className }: BigCounterProps) {
               duration: prefersReduced ? 0.01 : 0.45,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="font-anton text-[clamp(6rem,13vw,13rem)] leading-none"
+            className={cn(
+              'w-full leading-none will-change-transform',
+              isLeft ? 'text-left' : 'text-right'
+            )}
             style={{
-              WebkitTextStroke: '1px hsl(var(--foreground) / 0.3)',
+              WebkitTextStroke: '1.5px hsl(var(--foreground) / 0.4)',
               color: 'transparent',
             }}
           >
@@ -70,7 +81,7 @@ export function BigCounter({ value, label, className }: BigCounterProps) {
       </div>
 
       {/* Crossfading short label in mono font */}
-      <div className="h-6 mt-3 overflow-hidden">
+      <div className={cn('h-6 mt-3 overflow-hidden flex', isLeft ? 'justify-start' : 'justify-end')}>
         <AnimatePresence mode="wait">
           <motion.p
             key={label}
@@ -78,7 +89,10 @@ export function BigCounter({ value, label, className }: BigCounterProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: prefersReduced ? 0.01 : 0.25 }}
-            className="font-mono text-xs uppercase tracking-widest text-muted-foreground truncate max-w-[220px]"
+            className={cn(
+              'font-mono text-xs uppercase tracking-widest text-muted-foreground truncate max-w-[220px]',
+              isLeft ? 'text-left' : 'text-right'
+            )}
           >
             {label}
           </motion.p>
