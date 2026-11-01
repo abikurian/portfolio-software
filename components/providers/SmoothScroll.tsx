@@ -6,10 +6,14 @@ import { gsap, ScrollTrigger } from '@/lib/gsap';
 
 type LenisContextValue = {
   scrollTo: (target: string | number | HTMLElement) => void;
+  stop: () => void;
+  start: () => void;
 };
 
 const LenisContext = createContext<LenisContextValue>({
   scrollTo: () => {},
+  stop: () => {},
+  start: () => {},
 });
 
 export function useLenis() {
@@ -48,7 +52,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       lenisRef.current.scrollTo(target as string, {
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        offset: 0,
+        offset: -80, // account for fixed header offset
       });
     } else {
       if (typeof target === 'string') {
@@ -62,8 +66,16 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     }
   };
 
+  const stop = () => {
+    lenisRef.current?.stop();
+  };
+
+  const start = () => {
+    lenisRef.current?.start();
+  };
+
   return (
-    <LenisContext.Provider value={{ scrollTo }}>
+    <LenisContext.Provider value={{ scrollTo, stop, start }}>
       {children}
     </LenisContext.Provider>
   );

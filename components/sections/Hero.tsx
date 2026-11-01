@@ -55,7 +55,7 @@ export function Hero() {
   return (
     <section
       ref={heroRef}
-      id="hero"
+      id="home"
       aria-label="Introduction"
       className="relative min-h-screen min-h-svh flex flex-col justify-center pt-20 sm:pt-24 pb-12 sm:pb-16 border-b border-border/80 overflow-hidden"
     >

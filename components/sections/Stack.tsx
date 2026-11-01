@@ -9,9 +9,9 @@ import { stackGroups } from '@/lib/data/stack';
 
 export function Stack() {
   return (
-    <Section id="stack" ariaLabelledBy="stack-heading">
+    <Section id="skills" ariaLabelledBy="skills-heading">
       <Container>
-        <SectionHeading id="stack-heading" title="TECHNICAL STACK" />
+        <SectionHeading id="skills-heading" title="SKILLS" />
 
         {/* Spec Sheet Layout: Ruled plain grouped text lists */}
         <div className="border-t border-border">
