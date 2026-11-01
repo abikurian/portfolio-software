@@ -1,9 +1,11 @@
 export type Project = {
   slug: string;
   title: string;
+  status?: string;
+  phase?: string;
   featured?: boolean;
   role?: string;
-  stack: string[];
+  stack?: string[];
   summary: string;
   team?: string;
   textOnly?: boolean;

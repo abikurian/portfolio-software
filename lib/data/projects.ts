@@ -2,35 +2,54 @@ import type { Project } from '@/types';
 
 export const projects: Project[] = [
   {
-    slug: 'finance-tracker-pwa',
-    title: 'Personal Finance Tracker PWA',
-    featured: true,
-    role: 'Full-stack',
-    stack: ['React', 'Supabase', 'Dexie.js', 'Tailwind CSS'],
+    slug: 'local-workforce-recruitment-portal',
+    title: 'Local Workforce Recruitment Portal',
+    status: 'In development',
+    phase: 'Research & System Architecture Phase',
+    stack: [],
     summary:
-      'Financial app with OCR receipt processing and expense prediction. A two-way sync engine keeps offline and cloud data in parity, protected by strict Row Level Security.',
+      'A proposed web and mobile platform digitizing temporary staffing for the event and hospitality industry, focusing on tracking worker reliability, RBAC, and location-based job discovery.',
   },
   {
-    slug: 'smart-yatra-transit',
-    title: 'Smart Yatra Transit',
-    role: 'System architecture, presentation, live demo setup',
-    stack: ['Flutter', 'Dart', 'Firebase'],
+    slug: 'spendstudent-finance-tracker',
+    title: 'SpendStudent (Finance Tracker)',
+    stack: ['React', 'Supabase (PostgreSQL)', 'Dexie.js'],
     summary:
-      'Real-time fleet management app for tracking campus buses. Includes a custom geolocation algorithm that dynamically optimizes cloud sync frequency.',
-    team: 'Built with two project partners',
+      'A personal finance tracker featuring OCR receipt processing and a two-way sync engine ensuring offline-to-cloud data parity with strict row-level security.',
+  },
+  {
+    slug: 'smart-yatra',
+    title: 'Smart Yatra',
+    stack: ['Dart', 'Flutter', 'Firebase'],
+    summary:
+      'A real-time fleet management app for campus buses utilizing a custom geolocation algorithm to dynamically optimize cloud sync frequency and battery life.',
   },
   {
     slug: 'smart-voting-system',
     title: 'AI-Powered Smart Voting System',
     stack: ['Python', 'Next.js', 'MongoDB'],
     summary:
-      'Voting platform using machine learning for secure user verification and a tamper-proof tabulation environment.',
+      'An intelligent voting platform integrating machine learning for secure user verification and tamper-proof tabulation.',
   },
   {
-    slug: 'student-faculty-dbms',
-    title: 'Student-Faculty DBMS',
-    stack: ['MySQL', 'Relational schema design'],
+    slug: 'interactive-web-portfolios',
+    title: 'Interactive Web Portfolios',
+    stack: ['Astro', 'React', 'Tailwind CSS', 'Vercel'],
     summary:
-      'SQL schema management engine for multi-table entities with deep key relationships, complex joins and query indexing for high-throughput retrieval.',
+      'Highly optimized, responsive portfolios featuring glassmorphism, 3D scroll-based canvas animations, and brutalist UI layouts.',
+  },
+  {
+    slug: 'loan-prediction-application',
+    title: 'AI-Powered Loan Prediction Application',
+    stack: ['Python', 'Flask', 'Scikit-learn', 'Random Forest', 'Mistral AI API'],
+    summary:
+      'An ML application predicting loan outcomes, integrating Generative AI and LLMs to provide user-facing explanations for prediction reasoning.',
+  },
+  {
+    slug: 'automated-data-management-engine',
+    title: 'Automated Data Management Engine',
+    stack: ['Python', 'Pandas', 'Tkinter', 'gspread'],
+    summary:
+      'A secure backend automation pipeline for student marks entry. Parses local datasets securely and pushes them into cloud-backed Google Sheets infrastructure via service account authentication.',
   },
 ];

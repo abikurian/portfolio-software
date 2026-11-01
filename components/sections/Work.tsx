@@ -92,7 +92,7 @@ export function Work() {
                   prefersReducedMotion && 'transition-none'
                 )}
               >
-                {/* Collapsed Row Header: clean left-aligned title with no index spacing */}
+                {/* Collapsed Row Header: title (and status) + stack line */}
                 <button
                   type="button"
                   aria-expanded={isOpen}
@@ -103,8 +103,8 @@ export function Work() {
                   className="w-full text-left cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none py-1 group transition-transform duration-100 ease-out active:scale-[0.99] motion-reduce:active:scale-100 motion-reduce:transition-none select-none"
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-baseline">
-                    {/* Title */}
-                    <div className="lg:col-span-4">
+                    {/* Title and status */}
+                    <div className="lg:col-span-6">
                       <h3
                         className={cn(
                           'font-anton text-2xl sm:text-3xl uppercase tracking-tight transition-colors duration-150',
@@ -113,33 +113,25 @@ export function Work() {
                       >
                         {project.title}
                       </h3>
-                      {project.team && (
-                        <span className="font-mono text-[11px] text-muted-foreground block mt-1">
-                          {project.team}
+                      {project.status && (
+                        <span className="font-mono text-xs text-muted-foreground block mt-1">
+                          {project.status}
                         </span>
                       )}
                     </div>
 
-                    {/* Summary */}
-                    <div className="lg:col-span-5">
-                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                        {project.summary}
-                      </p>
-                    </div>
-
-                    {/* Stack & Metadata */}
-                    <div className="lg:col-span-3 lg:text-right">
-                      <div className="font-mono text-xs text-foreground/80">
-                        {project.stack.join(' · ')}
-                      </div>
-                      <div className="font-mono text-[11px] text-muted-foreground mt-1">
-                        {project.textOnly ? 'SYSTEM SPEC' : '2026'}
-                      </div>
+                    {/* Stack line */}
+                    <div className="lg:col-span-6 lg:text-right">
+                      {project.stack && project.stack.length > 0 && (
+                        <div className="font-mono text-xs text-foreground/80">
+                          {project.stack.join(' · ')}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </button>
 
-                {/* Expanded Details Area: Clean flush left alignment */}
+                {/* Expanded Details Area: Clean flush left alignment with full description */}
                 <div
                   id={`details-${project.slug}`}
                   className={cn(
@@ -158,9 +150,9 @@ export function Work() {
                         prefersReducedMotion && 'transition-none duration-0 translate-y-0 opacity-100'
                       )}
                     >
-                      {project.role && (
+                      {project.phase && (
                         <div className="font-mono text-xs text-muted-foreground uppercase">
-                          Role: <span className="text-foreground">{project.role}</span>
+                          Phase: <span className="text-foreground">{project.phase}</span>
                         </div>
                       )}
 
@@ -168,12 +160,14 @@ export function Work() {
                         {project.summary}
                       </p>
 
-                      <div className="font-mono text-xs text-muted-foreground">
-                        <span className="text-primary uppercase tracking-wider block mb-1">
-                          Technical Stack
-                        </span>
-                        <span className="text-foreground">{project.stack.join('   /   ')}</span>
-                      </div>
+                      {project.stack && project.stack.length > 0 && (
+                        <div className="font-mono text-xs text-muted-foreground">
+                          <span className="text-primary uppercase tracking-wider block mb-1">
+                            Technical Stack
+                          </span>
+                          <span className="text-foreground">{project.stack.join('   /   ')}</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
