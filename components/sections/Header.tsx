@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useLenis } from '@/components/providers/SmoothScroll';
 import { cn } from '@/lib/utils';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { IBM_Plex_Mono } from 'next/font/google';
 import { Container } from '@/components/ui/Container';
 
@@ -94,19 +94,7 @@ export function Header() {
           : 'bg-background/95 border-b border-transparent'
       )}
     >
-      <Container className="flex items-center justify-between">
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollTo(0);
-          }}
-          className="text-foreground font-anton text-xl tracking-wider uppercase hover:text-primary transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-        >
-          <span className="hidden sm:inline">ABI KURIAN VARGHESE</span>
-          <span className="sm:hidden">AKV</span>
-        </a>
-
+      <Container className="flex items-center justify-end">
         {/* Desktop Navigation */}
         <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-6">
           {NAV_LINKS.map((link) => {
@@ -128,15 +116,6 @@ export function Header() {
               </a>
             );
           })}
-
-          <a
-            href="#contact"
-            onClick={(e) => handleNavClick(e, '#contact')}
-            className="ml-2 inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono uppercase tracking-wider text-primary border border-primary/50 hover:bg-primary hover:text-primary-foreground transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-          >
-            <span>Contact</span>
-            <ArrowUpRight className="w-3 h-3" />
-          </a>
         </nav>
 
         {/* Mobile menu trigger */}
@@ -175,14 +154,6 @@ export function Header() {
                 <span className="text-xs text-muted-foreground">0{idx + 1}</span>
               </a>
             ))}
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, '#contact')}
-              className="mt-8 flex items-center justify-between p-3 border border-primary text-primary font-mono uppercase tracking-wider text-xs"
-            >
-              <span>Get in touch</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
           </nav>
         </div>
       )}
