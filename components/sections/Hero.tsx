@@ -52,20 +52,32 @@ export function Hero() {
     >
       <Container className="my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Title */}
+          {/* Title on two balanced lines */}
           <div className="lg:col-span-8">
             <h1
               ref={titleRef}
-              aria-label="ABI KURIAN"
-              className="font-anton uppercase tracking-tight text-[clamp(3.8rem,13vw,9.5rem)] leading-[0.88] text-foreground select-none overflow-hidden"
+              aria-label="ABI KURIAN VARGHESE"
+              className="font-anton uppercase tracking-tight text-[clamp(2.75rem,10vw,8.5rem)] leading-[0.9] text-foreground select-none overflow-hidden"
+              style={{ overflowWrap: 'anywhere' }}
             >
-              {'ABI KURIAN'.split('').map((char, i) => (
-                <span key={i} className="inline-block overflow-hidden align-top">
-                  <span className="hero-char inline-block will-change-transform">
-                    {char === ' ' ? '\u00A0' : char}
+              <span className="block overflow-hidden">
+                {'ABI KURIAN'.split('').map((char, i) => (
+                  <span key={i} className="inline-block overflow-hidden align-top">
+                    <span className="hero-char inline-block will-change-transform">
+                      {char === ' ' ? '\u00A0' : char}
+                    </span>
                   </span>
-                </span>
-              ))}
+                ))}
+              </span>
+              <span className="block overflow-hidden">
+                {'VARGHESE'.split('').map((char, i) => (
+                  <span key={`v-${i}`} className="inline-block overflow-hidden align-top">
+                    <span className="hero-char inline-block will-change-transform">
+                      {char}
+                    </span>
+                  </span>
+                ))}
+              </span>
             </h1>
           </div>
 

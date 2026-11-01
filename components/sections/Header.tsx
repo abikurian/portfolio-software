@@ -102,7 +102,8 @@ export function Header() {
           }}
           className="text-foreground font-anton text-xl tracking-wider uppercase hover:text-primary transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
-          ABI KURIAN
+          <span className="hidden sm:inline">ABI KURIAN VARGHESE</span>
+          <span className="sm:hidden">AKV</span>
         </a>
 
         {/* Desktop Navigation */}
