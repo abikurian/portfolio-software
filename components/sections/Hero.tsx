@@ -52,14 +52,8 @@ export function Hero() {
     >
       <Container className="my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Eyebrow & Title */}
+          {/* Title */}
           <div className="lg:col-span-8">
-            <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
-              <span>KOCHI, KERALA</span>
-              <span className="text-muted-foreground">/</span>
-              <span className="text-muted-foreground">B.TECH CSE 2023-2027</span>
-            </div>
-
             <h1
               ref={titleRef}
               aria-label="ABI KURIAN"
