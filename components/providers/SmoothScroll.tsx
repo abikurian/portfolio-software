@@ -34,11 +34,15 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      syncTouch: false,
     });
     lenisRef.current = lenis;
     if (typeof window !== 'undefined') {
       (window as unknown as { lenis?: Lenis }).lenis = lenis;
     }
+
+    // Keep ScrollTrigger and Lenis in sync across mobile address bar resizes
+    ScrollTrigger.config({ ignoreMobileResize: true });
 
     lenis.on('scroll', ScrollTrigger.update);
     const tick = (time: number) => {
@@ -51,7 +55,19 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
+    let orientationTimer: NodeJS.Timeout | null = null;
+    const handleOrientationChange = () => {
+      if (orientationTimer) clearTimeout(orientationTimer);
+      orientationTimer = setTimeout(() => {
+        lenis.resize();
+        ScrollTrigger.refresh();
+      }, 150);
+    };
+    window.addEventListener('orientationchange', handleOrientationChange);
+
     return () => {
+      if (orientationTimer) clearTimeout(orientationTimer);
+      window.removeEventListener('orientationchange', handleOrientationChange);
       gsap.ticker.remove(tick);
       lenis.destroy();
       lenisRef.current = null;
