@@ -56,9 +56,10 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${anton.variable} ${robotoFlex.variable} ${jetbrainsMono.variable} h-full`}
     >
-      <body className="min-h-full antialiased font-roboto">
+      <body suppressHydrationWarning className="min-h-full antialiased font-roboto">
         <CursorFollower />
         <a
           href="#main-content"
