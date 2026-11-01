@@ -55,6 +55,7 @@
   --font-anton:        var(--font-anton);
   --font-roboto:       var(--font-roboto-flex);
   --font-mono:         var(--font-mono);
+  --font-header:       var(--font-inclusive-sans);
 
   /* Border radius: square */
   --radius-sm:  0px;
@@ -69,6 +70,10 @@
 }
 
 /* ─── Custom utilities ─── */
+@utility font-header {
+  font-family: var(--font-inclusive-sans), sans-serif;
+}
+
 @utility py-section {
   padding-top: var(--spacing-section);
   padding-bottom: var(--spacing-section);
@@ -99,30 +104,15 @@
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     font-family: var(--font-roboto-flex), system-ui, sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;
-    min-height: 100dvh;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
-  ::selection {
-    background-color: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
-  }
-
+  /* Focus ring per section 3.3 */
   :focus-visible {
     outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
-  }
-
-  :focus:not(:focus-visible) {
-    outline: none;
-  }
-
-  img,
-  video {
-    max-width: 100%;
-    height: auto;
   }
 }
