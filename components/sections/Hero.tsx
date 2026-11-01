@@ -48,9 +48,9 @@ export function Hero() {
       ref={heroRef}
       id="hero"
       aria-label="Introduction"
-      className="relative min-h-[85vh] flex flex-col justify-between pt-28 md:pt-36 pb-12 border-b border-border/80"
+      className="relative min-h-[80vh] flex flex-col justify-center pt-24 md:pt-32 pb-16 border-b border-border/80"
     >
-      <Container className="my-auto">
+      <Container className="my-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Title on two balanced lines */}
           <div className="lg:col-span-8">
@@ -118,17 +118,6 @@ export function Hero() {
             </div>
           </div>
         </div>
-      </Container>
-
-      {/* Ruled Bottom Line with index metadata */}
-      <Container className="w-full pt-8 flex items-center justify-between text-xs font-mono text-muted-foreground border-t border-border/40">
-        <span>INDEX 00 / PORTFOLIO SPECIFICATION</span>
-        <button
-          onClick={() => scrollTo('#about')}
-          className="hover:text-primary transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-        >
-          SCROLL TO EXPLORE &darr;
-        </button>
       </Container>
     </section>
   );
