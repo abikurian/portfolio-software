@@ -33,12 +33,4 @@ export const projects: Project[] = [
     summary:
       'SQL schema management engine for multi-table entities with deep key relationships, complex joins and query indexing for high-throughput retrieval.',
   },
-  {
-    slug: 'network-system-config',
-    title: 'Network & System Configuration',
-    stack: ['Linux', 'C', 'Kali', 'Ubuntu', 'WSL', 'VirtualBox'],
-    summary:
-      'Terminal-driven system configuration and network socket programming across Linux environments in VirtualBox and WSL.',
-    textOnly: true,
-  },
 ];

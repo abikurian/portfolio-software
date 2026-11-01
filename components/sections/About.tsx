@@ -24,12 +24,6 @@ export function About() {
               Most of my work sits where data has to stay correct. A finance tracker that syncs offline changes to the cloud without losing parity, protected by Row Level Security. A campus bus tracker that uses a geolocation algorithm to decide how often it syncs.
             </p>
           </FadeUp>
-
-          <FadeUp delay={0.12}>
-            <p>
-              I also work below the web layer: Linux, C and socket programming, and relational schema design in MySQL. Lately I&apos;ve been building with generative AI pipelines and running local models with Ollama.
-            </p>
-          </FadeUp>
         </div>
       </Container>
     </Section>
