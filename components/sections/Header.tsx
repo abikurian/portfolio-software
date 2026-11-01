@@ -5,7 +5,14 @@ import { useState, useEffect, useRef } from 'react';
 import { useLenis } from '@/components/providers/SmoothScroll';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
+import { IBM_Plex_Mono } from 'next/font/google';
 import { Container } from '@/components/ui/Container';
+
+const ibmPlexMonoNav = IBM_Plex_Mono({
+  weight: ['400', '500'],
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 const NAV_LINKS = [
   { href: '#about', label: 'About' },
@@ -98,7 +105,8 @@ export function Header() {
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={cn(
-                  'font-header text-xs tracking-wider uppercase transition-colors duration-150 py-1 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none relative after:content-[\'\'] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-primary after:origin-left after:transition-transform after:duration-250 after:ease-out motion-reduce:after:transition-none',
+                  ibmPlexMonoNav.className,
+                  'relative text-xs tracking-wider uppercase transition-colors duration-150 py-1 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none after:content-[\'\'] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-primary after:origin-left after:transition-transform after:duration-250 after:ease-out motion-reduce:after:transition-none',
                   isActive
                     ? 'text-primary font-medium after:scale-x-100'
                     : 'text-muted-foreground hover:text-primary font-normal after:scale-x-0 hover:after:scale-x-100'
@@ -138,7 +146,8 @@ export function Header() {
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={cn(
-                  'font-header flex items-center justify-between text-lg tracking-wide uppercase text-foreground hover:text-primary transition-colors py-4 border-b border-border/40 font-normal'
+                  ibmPlexMonoNav.className,
+                  'flex items-center justify-between text-lg tracking-wide uppercase text-foreground hover:text-primary transition-colors py-4 border-b border-border/40 font-normal'
                 )}
               >
                 <span>{link.label}</span>

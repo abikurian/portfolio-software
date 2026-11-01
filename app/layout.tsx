@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Anton, Roboto_Flex, JetBrains_Mono, Inclusive_Sans } from 'next/font/google';
+import { Anton, Roboto_Flex, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import SmoothScroll from '@/components/providers/SmoothScroll';
 
@@ -19,13 +19,6 @@ const robotoFlex = Roboto_Flex({
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
-  display: 'swap',
-});
-
-const inclusiveSans = Inclusive_Sans({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-inclusive-sans',
   display: 'swap',
 });
 
@@ -62,7 +55,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${robotoFlex.variable} ${jetbrainsMono.variable} ${inclusiveSans.variable} h-full`}
+      className={`${anton.variable} ${robotoFlex.variable} ${jetbrainsMono.variable} h-full`}
     >
       <body className="min-h-full antialiased font-roboto">
         <a

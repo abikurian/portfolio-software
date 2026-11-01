@@ -55,7 +55,6 @@
   --font-anton:        var(--font-anton);
   --font-roboto:       var(--font-roboto-flex);
   --font-mono:         var(--font-mono);
-  --font-header:       var(--font-inclusive-sans);
 
   /* Border radius: square */
   --radius-sm:  0px;
@@ -70,10 +69,6 @@
 }
 
 /* ─── Custom utilities ─── */
-@utility font-header {
-  font-family: var(--font-inclusive-sans), sans-serif;
-}
-
 @utility py-section {
   padding-top: var(--spacing-section);
   padding-bottom: var(--spacing-section);
