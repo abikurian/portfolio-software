@@ -67,10 +67,19 @@ export function Stack() {
                       ref={(el) => {
                         groupRefs.current[idx] = el;
                       }}
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => setHoveredIdx((prev) => (prev === idx ? null : idx))}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setHoveredIdx((prev) => (prev === idx ? null : idx));
+                        }
+                      }}
                       onMouseEnter={() => setHoveredIdx(idx)}
                       onFocus={() => setHoveredIdx(idx)}
                       className={cn(
-                        'relative py-6 sm:py-8 border-b border-border/80 grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-8 items-baseline transition-all duration-300 ease-out cursor-default',
+                        'relative py-6 sm:py-8 border-b border-border/80 grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-8 items-baseline transition-all duration-300 ease-out cursor-default touch-manipulation focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
                         isDimmed ? 'opacity-40' : 'opacity-100',
                         isHovered && 'translate-x-3 motion-reduce:translate-x-0'
                       )}

@@ -37,7 +37,7 @@ function usePrefersReducedMotion() {
 
 export function Work() {
   const { resize } = useLenis();
-  const [activeSlug, setActiveSlug] = useState<string | null>(null);
+  const [activeSlug, setActiveSlug] = useState<string | null>(projects[0]?.slug ?? null);
   const [activeIdx, setActiveIdx] = useState(0);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isFinePointer = useIsFinePointer();
@@ -115,7 +115,7 @@ export function Work() {
                         onClick={() => handleToggleClick(project.slug, idx)}
                         onFocus={() => handleFocus(project.slug, idx)}
                         onKeyDown={(e) => handleKeyDown(e, project.slug, idx)}
-                        className="w-full text-left cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none py-1 group transition-transform duration-100 ease-out active:scale-[0.99] motion-reduce:active:scale-100 motion-reduce:transition-none select-none"
+                        className="w-full text-left min-h-[44px] cursor-pointer touch-manipulation focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none py-2 group transition-transform duration-100 ease-out active:scale-[0.99] motion-reduce:active:scale-100 motion-reduce:transition-none select-none"
                       >
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-baseline">
                           {/* Title and status */}

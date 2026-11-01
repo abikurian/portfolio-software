@@ -21,10 +21,10 @@ export const buttonVariants = cva(
           'border-transparent text-foreground underline-offset-4 hover:underline hover:text-primary p-0 h-auto',
       },
       size: {
-        sm: 'h-8 px-3',
-        md: 'min-h-10 px-5 py-2.5',
-        lg: 'min-h-12 px-7 py-3',
-        icon: 'h-10 w-10',
+        sm: 'min-h-[44px] px-4 py-2',
+        md: 'min-h-[44px] px-5 py-2.5',
+        lg: 'min-h-[48px] px-7 py-3',
+        icon: 'min-h-[44px] min-w-[44px] h-11 w-11',
       },
     },
     defaultVariants: {
@@ -50,7 +50,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       const el = resolvedRef.current;
       if (!el || !magnetic || variant !== 'primary') return;
 
-      const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+      const isFinePointer =
+        window.matchMedia('(pointer: fine)').matches &&
+        !window.matchMedia('(pointer: coarse)').matches;
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!isFinePointer || prefersReduced) return;
 

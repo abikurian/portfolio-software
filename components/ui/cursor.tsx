@@ -8,15 +8,21 @@ function useIsDesktopFinePointer() {
   return useSyncExternalStore(
     (callback) => {
       const mqPointer = window.matchMedia('(pointer: fine)');
+      const mqCoarse = window.matchMedia('(pointer: coarse)');
       const mqMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       mqPointer.addEventListener('change', callback);
+      mqCoarse.addEventListener('change', callback);
       mqMotion.addEventListener('change', callback);
       return () => {
         mqPointer.removeEventListener('change', callback);
+        mqCoarse.removeEventListener('change', callback);
         mqMotion.removeEventListener('change', callback);
       };
     },
-    () => window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    () =>
+      window.matchMedia('(pointer: fine)').matches &&
+      !window.matchMedia('(pointer: coarse)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     () => false
   );
 }

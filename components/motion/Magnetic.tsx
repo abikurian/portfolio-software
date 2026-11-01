@@ -17,7 +17,9 @@ export function Magnetic({ children, strength = 28 }: MagneticProps) {
     if (!el) return;
 
     // Only apply on fine pointer devices (desktop mouse), never touch
-    const finePointer = window.matchMedia('(pointer: fine)').matches;
+    const finePointer =
+      window.matchMedia('(pointer: fine)').matches &&
+      !window.matchMedia('(pointer: coarse)').matches;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!finePointer || reducedMotion) return;
 

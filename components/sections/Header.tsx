@@ -112,6 +112,17 @@ export function Header() {
     };
   }, [mobileMenuOpen, stop, start]);
 
+  // Restore scroll on route / hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      setMobileMenuOpen(false);
+      start();
+      document.body.style.overflow = '';
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [start]);
+
   // Trap focus & escape key in mobile overlay
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -232,7 +243,7 @@ export function Header() {
           onClick={() => setMobileMenuOpen(true)}
           className={cn(
             ibmPlexMonoNav.className,
-            'inline-flex items-center gap-2 px-3.5 py-2 bg-background/90 backdrop-blur-md border border-border text-foreground text-xs uppercase tracking-wider hover:border-primary transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none'
+            'inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] min-w-[44px] touch-manipulation bg-background/90 backdrop-blur-md border border-border text-foreground text-xs uppercase tracking-wider hover:border-primary active:scale-[0.98] transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none'
           )}
         >
           <Menu className="w-4 h-4 text-primary" />
@@ -265,7 +276,7 @@ export function Header() {
                 type="button"
                 aria-label="Close menu"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 border border-border text-foreground hover:border-primary hover:text-primary transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                className="p-3 min-h-[44px] min-w-[44px] flex items-center justify-center touch-manipulation border border-border text-foreground hover:border-primary hover:text-primary active:scale-[0.96] transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -283,7 +294,7 @@ export function Header() {
                     },
                   },
                 }}
-                className="space-y-4"
+                className="space-y-3 sm:space-y-4"
               >
                 {(NAV_ITEMS ?? []).map((item) => {
                   const isActive = activeSection === item.href;
@@ -300,7 +311,7 @@ export function Header() {
                         onClick={(e) => handleLinkClick(e, item.href)}
                         aria-current={isActive ? 'true' : undefined}
                         className={cn(
-                          'block font-anton text-4xl sm:text-5xl uppercase tracking-tight transition-colors py-1 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
+                          'block font-anton text-4xl sm:text-5xl uppercase tracking-tight transition-colors py-2 min-h-[44px] flex items-center touch-manipulation focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
                           isActive ? 'text-primary' : 'text-foreground hover:text-primary'
                         )}
                       >
