@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Anton, Roboto_Flex, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import SmoothScroll from '@/components/providers/SmoothScroll';
+import { CursorFollower } from '@/components/ui/cursor';
 
 const anton = Anton({
   weight: '400',
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       className={`${anton.variable} ${robotoFlex.variable} ${jetbrainsMono.variable} h-full`}
     >
       <body className="min-h-full antialiased font-roboto">
+        <CursorFollower />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:text-xs focus:font-mono uppercase"

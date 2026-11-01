@@ -6,6 +6,7 @@ import { gsap, useGSAP } from '@/lib/gsap';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { KineticGrid } from '@/components/ui/kinetic-grid';
+import { TechMarquee } from '@/components/ui/TechMarquee';
 import { useLenis } from '@/components/providers/SmoothScroll';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { IBM_Plex_Sans } from 'next/font/google';
@@ -32,20 +33,20 @@ export function Hero() {
       const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
       if (titleRef.current) {
-        const letters = titleRef.current.querySelectorAll('.hero-char');
+        const lines = titleRef.current.querySelectorAll('.hero-line');
         tl.fromTo(
-          letters,
-          { yPercent: 120, opacity: 0 },
-          { yPercent: 0, opacity: 1, duration: 1, stagger: 0.02 }
+          lines,
+          { yPercent: 110, opacity: 0 },
+          { yPercent: 0, opacity: 1, duration: 0.85, stagger: 0.1, ease: 'power4.out' }
         );
       }
 
       if (contentRef.current) {
         tl.fromTo(
           contentRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
-          '-=0.5'
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+          '-=0.45'
         );
       }
     },
@@ -57,7 +58,7 @@ export function Hero() {
       ref={heroRef}
       id="home"
       aria-label="Introduction"
-      className="relative min-h-screen min-h-svh flex flex-col justify-center pt-20 sm:pt-24 pb-12 sm:pb-16 border-b border-border/80 overflow-hidden"
+      className="relative min-h-screen min-h-svh flex flex-col justify-center pt-20 sm:pt-24 pb-14 sm:pb-16 border-b border-border/80 overflow-hidden scroll-mt-24"
     >
       {/* Kinetic grid background (pointer-events none, behind content) */}
       <KineticGrid parentRef={heroRef} />
@@ -73,22 +74,10 @@ export function Hero() {
               style={{ overflowWrap: 'anywhere' }}
             >
               <span className="block overflow-hidden">
-                {'ABI KURIAN'.split('').map((char, i) => (
-                  <span key={i} className="inline-block overflow-hidden align-top">
-                    <span className="hero-char inline-block will-change-transform">
-                      {char === ' ' ? '\u00A0' : char}
-                    </span>
-                  </span>
-                ))}
+                <span className="hero-line block will-change-transform">ABI KURIAN</span>
               </span>
               <span className="block overflow-hidden">
-                {'VARGHESE'.split('').map((char, i) => (
-                  <span key={`v-${i}`} className="inline-block overflow-hidden align-top">
-                    <span className="hero-char inline-block will-change-transform">
-                      {char}
-                    </span>
-                  </span>
-                ))}
+                <span className="hero-line block will-change-transform">VARGHESE</span>
               </span>
             </h1>
 
@@ -98,7 +87,7 @@ export function Hero() {
               className="mt-[clamp(0.75rem,1.5vw,1.5rem)] max-w-2xl"
             >
               <div>
-                <p className="font-mono text-xs uppercase tracking-widest text-primary mb-1">
+                <p className="font-mono text-xs uppercase tracking-widest text-primary mb-1.5">
                   ROLE
                 </p>
                 <p className="text-xl sm:text-2xl text-foreground font-medium leading-snug">
@@ -140,6 +129,9 @@ export function Hero() {
           </div>
         </div>
       </Container>
+
+      {/* Tech Marquee pinned to bottom edge per task 5 */}
+      <TechMarquee />
     </section>
   );
 }

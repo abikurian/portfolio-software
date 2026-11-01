@@ -16,8 +16,8 @@ export function FadeUp({
   children,
   className,
   delay = 0,
-  duration = 0.8,
-  y = 35,
+  duration = 0.7,
+  y = 24,
   triggerHook = 'top 90%',
   ...props
 }: FadeUpProps) {
@@ -57,4 +57,3 @@ export function FadeUp({
     </div>
   );
 }
-
