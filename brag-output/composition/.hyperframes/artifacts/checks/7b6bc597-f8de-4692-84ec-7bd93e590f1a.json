@@ -1,0 +1,540 @@
+{
+  "ok": true,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 5,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "composition_file_too_large",
+        "severity": "warning",
+        "message": "This HTML composition file has 400 lines. Smaller sub-compositions are easier to read, iterate on, and diff.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "D:\\Project\\portfolio-software\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Split coherent scenes or layers into separate .html files under compositions/, then mount them from the parent with data-composition-src so each file stays small enough to inspect, revise, and validate independently."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene1\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene1",
+        "dataAttributes": {},
+        "sourceFile": "D:\\Project\\portfolio-software\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene1\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene2\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene2",
+        "dataAttributes": {},
+        "sourceFile": "D:\\Project\\portfolio-software\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene2\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene3\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene3",
+        "dataAttributes": {},
+        "sourceFile": "D:\\Project\\portfolio-software\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene3\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene4\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene4",
+        "dataAttributes": {},
+        "sourceFile": "D:\\Project\\portfolio-software\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene4\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      }
+    ],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "duration": 18,
+    "samples": [
+      1,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13,
+      15,
+      17
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 0,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      1,
+      5,
+      9,
+      13,
+      17
+    ],
+    "checked": 55,
+    "passed": 55
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 2,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "dead_stretch",
+        "severity": "warning",
+        "message": "Nothing on screen changes for 3.50 s (9.88–13.38 s): start the next move within 3 s, or put data-hold on the element whose stillness is deliberate; see references/motion.md.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 9.875,
+        "seconds": 3.5,
+        "floorSeconds": 3,
+        "until": 13.375
+      },
+      {
+        "code": "text_below_floor",
+        "severity": "warning",
+        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and 40 text elements stay under it for 0.5 s or more, the smallest \"ENGINEERING CONTACT\" at 15 px: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
+        "text": "ENGINEERING CONTACT",
+        "selector": "#s4-badge",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 173.62,
+          "y": 490.93,
+          "width": 174.93,
+          "height": 20.14
+        },
+        "time": 14,
+        "times": [
+          0,
+          0,
+          0,
+          0,
+          0.25,
+          0.25,
+          0.875,
+          0.875,
+          0.875,
+          4,
+          4,
+          4.5,
+          4.5,
+          4.5,
+          5,
+          5,
+          5,
+          5.625,
+          5.625,
+          5.625,
+          6.25,
+          6.25,
+          6.25,
+          9,
+          9,
+          9,
+          9,
+          9.375,
+          9.375,
+          9.375,
+          9.375,
+          9.375,
+          9.375,
+          9.375,
+          9.375,
+          14,
+          14.25,
+          14.625,
+          15,
+          15
+        ],
+        "fontPx": 15.34,
+        "floorPx": 28,
+        "seconds": 4,
+        "elements": [
+          {
+            "selector": "#s4-badge",
+            "text": "ENGINEERING CONTACT",
+            "fontPx": 15.34,
+            "time": 14,
+            "seconds": 4
+          },
+          {
+            "selector": "#s4-email",
+            "text": "abikurianvarghese@gmail.com",
+            "fontPx": 15.61,
+            "time": 14.625,
+            "seconds": 3.375
+          },
+          {
+            "selector": "#s3-card1 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+            "text": "SELECTED WORK // 01",
+            "fontPx": 15.83,
+            "time": 9,
+            "seconds": 4.75
+          },
+          {
+            "selector": "#s3-card1 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(2)",
+            "text": "PRODUCTION PWA",
+            "fontPx": 15.83,
+            "time": 9,
+            "seconds": 4.75
+          },
+          {
+            "selector": "#s3-card1 > div:nth-of-type(1) > p:nth-of-type(1)",
+            "text": "Personal finance tracker with OCR receipt processing and a custom two-way sync engine ensuring offline-to-cloud data parity with PostgreSQL Row Level Security.",
+            "fontPx": 15.83,
+            "time": 9,
+            "seconds": 4.75
+          },
+          {
+            "selector": "#s3-card2 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+            "text": "SELECTED WORK // 02",
+            "fontPx": 15.85,
+            "time": 9.375,
+            "seconds": 4.375
+          },
+          {
+            "selector": "#s3-card2 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(2)",
+            "text": "MOBILE ALGORITHM",
+            "fontPx": 15.85,
+            "time": 9.375,
+            "seconds": 4.375
+          },
+          {
+            "selector": "#s3-card2 > div:nth-of-type(1) > p:nth-of-type(1)",
+            "text": "Real-time campus fleet tracker utilizing a dynamic geolocation polling algorithm to minimize battery consumption while maintaining instant route parity.",
+            "fontPx": 15.85,
+            "time": 9.375,
+            "seconds": 4.375
+          },
+          {
+            "selector": "#s3-card2 > div:nth-of-type(2) > div:nth-of-type(1) > span:nth-of-type(1)",
+            "text": "STACK:",
+            "fontPx": 15.85,
+            "time": 9.375,
+            "seconds": 4.375
+          },
+          {
+            "selector": "#s3-card2 > div:nth-of-type(2) > div:nth-of-type(1) > span:nth-of-type(2)",
+            "text": "Dart · Flutter · Firebase",
+            "fontPx": 15.85,
+            "time": 9.375,
+            "seconds": 4.375
+          },
+          {
+            "selector": "#s3-card2 > div:nth-of-type(2) > div:nth-of-type(2) > span:nth-of-type(1)",
+            "text": "STATUS:",
+            "fontPx": 15.85,
+            "time": 9.375,
+            "seconds": 4.375
+          },
+          {
+            "selector": "#s3-card2 > div:nth-of-type(2) > div:nth-of-type(2) > span:nth-of-type(2)",
+            "text": "DEPLOYED CAMPUS SYSTEM",
+            "fontPx": 15.85,
+            "time": 9.375,
+            "seconds": 4.375
+          },
+          {
+            "selector": "span.px-3.py-1",
+            "text": "ENGINEERING SPEC SHEET",
+            "fontPx": 15.97,
+            "time": 0.25,
+            "seconds": 3.5
+          },
+          {
+            "selector": "#s1-badge > span:nth-of-type(3)",
+            "text": "SYSTEM ARCHITECTURE",
+            "fontPx": 15.97,
+            "time": 0.25,
+            "seconds": 3.5
+          },
+          {
+            "selector": "#s1-role > div:nth-of-type(1) > span:nth-of-type(1)",
+            "text": "ROLE:",
+            "fontPx": 15.97,
+            "time": 0.875,
+            "seconds": 2.875
+          },
+          {
+            "selector": "#s1-role > div:nth-of-type(1) > span:nth-of-type(2)",
+            "text": "FULL-STACK DEVELOPER",
+            "fontPx": 15.97,
+            "time": 0.875,
+            "seconds": 2.875
+          },
+          {
+            "selector": "div.text-\\[\\#8d8783\\].text-lg",
+            "text": "OFFLINE-FIRST WEB APPS · LOCAL AI",
+            "fontPx": 15.97,
+            "time": 0.875,
+            "seconds": 2.875
+          },
+          {
+            "selector": "div.corner-tl.font-mono > span:nth-of-type(2)",
+            "text": "ENGINEERING PORTFOLIO // 2026",
+            "fontPx": 16,
+            "time": 0,
+            "seconds": 18
+          },
+          {
+            "selector": "div.corner-tr.font-mono",
+            "text": "SYS: VERIFIED_NO_FLUFF",
+            "fontPx": 16,
+            "time": 0,
+            "seconds": 18
+          },
+          {
+            "selector": "div.corner-bl.font-mono",
+            "text": "LOC: KOCHI, KERALA // SNGCE CSE",
+            "fontPx": 16,
+            "time": 0,
+            "seconds": 18
+          },
+          {
+            "selector": "div.corner-br.font-mono",
+            "text": "abikurian.dev",
+            "fontPx": 16,
+            "time": 0,
+            "seconds": 18
+          },
+          {
+            "selector": "#s2-statement",
+            "text": "\"MOST OF MY WORK SITS WHERE .\"",
+            "fontPx": 16,
+            "time": 4,
+            "seconds": 4.75
+          },
+          {
+            "selector": "#s2-statement > span:nth-of-type(1)",
+            "text": "DATA HAS TO STAY CORRECT",
+            "fontPx": 16,
+            "time": 4,
+            "seconds": 4.75
+          },
+          {
+            "selector": "#spec-row-1 > span:nth-of-type(1)",
+            "text": "01 // LANGUAGES",
+            "fontPx": 16,
+            "time": 4.5,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#spec-row-1 > span:nth-of-type(2)",
+            "text": "JavaScript · TypeScript · Python · Dart · C · SQL",
+            "fontPx": 16,
+            "time": 4.5,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#spec-row-1 > span:nth-of-type(3)",
+            "text": "COMPILED & TYPED",
+            "fontPx": 16,
+            "time": 4.5,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#spec-row-2 > span:nth-of-type(1)",
+            "text": "02 // ARCHITECTURE",
+            "fontPx": 16,
+            "time": 5,
+            "seconds": 3.75
+          },
+          {
+            "selector": "#spec-row-2 > span:nth-of-type(2)",
+            "text": "Offline-First PWAs · Row Level Security (RLS) · 2-Way Parity",
+            "fontPx": 16,
+            "time": 5,
+            "seconds": 3.75
+          },
+          {
+            "selector": "#spec-row-2 > span:nth-of-type(3)",
+            "text": "RESILIENT BACKENDS",
+            "fontPx": 16,
+            "time": 5,
+            "seconds": 3.75
+          },
+          {
+            "selector": "#spec-row-3 > span:nth-of-type(1)",
+            "text": "03 // DATA & CLOUD",
+            "fontPx": 16,
+            "time": 5.625,
+            "seconds": 3.125
+          },
+          {
+            "selector": "#spec-row-3 > span:nth-of-type(2)",
+            "text": "Supabase (PostgreSQL) · Cloud Firestore · Dexie.js (IndexedDB)",
+            "fontPx": 16,
+            "time": 5.625,
+            "seconds": 3.125
+          },
+          {
+            "selector": "#spec-row-3 > span:nth-of-type(3)",
+            "text": "STRICT RECONCILIATION",
+            "fontPx": 16,
+            "time": 5.625,
+            "seconds": 3.125
+          },
+          {
+            "selector": "#spec-row-4 > span:nth-of-type(1)",
+            "text": "04 // INTELLIGENCE",
+            "fontPx": 16,
+            "time": 6.25,
+            "seconds": 2.5
+          },
+          {
+            "selector": "#spec-row-4 > span:nth-of-type(2)",
+            "text": "Ollama · Local LLMs · ML Inference Pipelines · Python",
+            "fontPx": 16,
+            "time": 6.25,
+            "seconds": 2.5
+          },
+          {
+            "selector": "#spec-row-4 > span:nth-of-type(3)",
+            "text": "ON-DEVICE PRIVACY",
+            "fontPx": 16,
+            "time": 6.25,
+            "seconds": 2.5
+          },
+          {
+            "selector": "#s4-domain",
+            "text": "LIVE AT",
+            "fontPx": 16,
+            "time": 15,
+            "seconds": 3
+          },
+          {
+            "selector": "span.text-\\[\\#f3f1ef\\].border-b",
+            "text": "ABIKURIAN.DEV",
+            "fontPx": 16,
+            "time": 15,
+            "seconds": 3
+          },
+          {
+            "selector": "#s3-card1 > div:nth-of-type(1) > h2:nth-of-type(1)",
+            "text": "SPENDSTUDENT (FINANCE TRACKER)",
+            "fontPx": 23.75,
+            "time": 9,
+            "seconds": 4.75
+          },
+          {
+            "selector": "#s3-card2 > div:nth-of-type(1) > h2:nth-of-type(1)",
+            "text": "SMART YATRA",
+            "fontPx": 23.78,
+            "time": 9.375,
+            "seconds": 4.375
+          },
+          {
+            "selector": "#s4-title",
+            "text": "LET'S BUILD SYSTEMS THAT LAST.",
+            "fontPx": 24,
+            "time": 14.25,
+            "seconds": 3.75
+          }
+        ]
+      }
+    ],
+    "enabled": true,
+    "step": 0.125,
+    "samples": 144
+  },
+  "audio": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}

@@ -1,0 +1,3 @@
+Most of my work sits where data has to stay correct. Full-stack engineering focused on offline-first architectures, two-way database parity, and local AI.
+
+Live at https://abikurian.dev
