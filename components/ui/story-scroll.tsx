@@ -32,13 +32,13 @@ export const FlowSection = React.forwardRef<HTMLElement, FlowSectionProps>(
         data-flow-section
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
-        className="relative min-h-screen min-h-svh w-full overflow-clip scroll-mt-24"
+        className="relative min-h-screen min-h-svh w-full overflow-clip scroll-mt-24 [contain:layout_paint]"
         {...props}
       >
         <div
           data-flow-inner
           className={cn(
-            'flow-art-container relative flex min-h-screen min-h-svh w-full flex-col',
+            'flow-art-container relative flex min-h-screen min-h-svh w-full flex-col [transform:translateZ(0)] [backface-visibility:hidden]',
             className
           )}
           style={{ transformOrigin: 'bottom left' }}
@@ -60,7 +60,7 @@ export interface FlowArtProps extends React.HTMLAttributes<HTMLDivElement> {
 export default function FlowArt({
   children,
   className,
-  angle = 10,
+  angle = 6,
   'aria-label': ariaLabel = 'Story scroll',
   ...props
 }: FlowArtProps) {
@@ -142,6 +142,9 @@ export default function FlowArt({
                   end: 'top 20%',
                   scrub: 1,
                   invalidateOnRefresh: true,
+                  onToggle: (self) => {
+                    inner.style.willChange = self.isActive ? 'transform' : 'auto';
+                  },
                 },
               }
             );

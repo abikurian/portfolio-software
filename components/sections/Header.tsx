@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLenis } from '@/components/providers/SmoothScroll';
+import { ScrollTrigger } from '@/lib/gsap';
 import { cn } from '@/lib/utils';
 import { X, Menu } from 'lucide-react';
 import { IBM_Plex_Mono } from 'next/font/google';
@@ -51,44 +52,27 @@ export function Header() {
     }
   }, []);
 
-  // Track active section based on section positions (handles pinned/stacked & standard sections)
+  // Track active section using ScrollTrigger cached positions (zero layout reads during scroll)
   useEffect(() => {
-    const sectionIds = ['contact', 'experience', 'skills', 'work', 'about', 'home'];
+    const sectionIds = ['home', 'about', 'work', 'skills', 'experience', 'contact'];
+    const triggers: ScrollTrigger[] = [];
 
-    let rafId: number | null = null;
-    const checkActiveSection = () => {
-      const scrollBottom = window.innerHeight + window.scrollY;
-      const docHeight = document.documentElement.scrollHeight;
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
 
-      if (scrollBottom >= docHeight - 60) {
-        setActiveSection('#contact');
-        return;
-      }
-
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= 140) {
-          setActiveSection('#' + id);
-          return;
-        }
-      }
-
-      setActiveSection('#home');
-    };
-
-    const onScroll = () => {
-      if (rafId !== null) cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(checkActiveSection);
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    checkActiveSection();
+      const st = ScrollTrigger.create({
+        trigger: el,
+        start: id === 'home' ? 'top top' : 'top 200px',
+        end: 'bottom 200px',
+        onEnter: () => setActiveSection('#' + id),
+        onEnterBack: () => setActiveSection('#' + id),
+      });
+      triggers.push(st);
+    });
 
     return () => {
-      if (rafId !== null) cancelAnimationFrame(rafId);
-      window.removeEventListener('scroll', onScroll);
+      triggers.forEach((st) => st.kill());
     };
   }, []);
 

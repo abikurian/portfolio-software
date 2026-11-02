@@ -30,9 +30,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     if (prefersReduced) return;
 
     const lenis = new Lenis({
-      lerp: 0.08,
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.085,
+      wheelMultiplier: 1,
       smoothWheel: true,
       syncTouch: false,
     });
