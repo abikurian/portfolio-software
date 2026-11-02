@@ -42,7 +42,7 @@ export const FlowSection = React.forwardRef<HTMLElement, FlowSectionProps>(
         <div
           data-flow-inner
           className={cn(
-            'flow-art-container relative flex min-h-screen min-h-svh w-full flex-col [transform:translateZ(0)] [backface-visibility:hidden]',
+            'flow-art-container relative flex min-h-screen min-h-svh w-full flex-col [backface-visibility:hidden]',
             className
           )}
           style={{ transformOrigin: 'bottom left' }}
@@ -76,6 +76,7 @@ export default function FlowArt({
 
     const mm = gsap.matchMedia();
 
+    // Enabled only at >=1024px with no reduced motion; below that plain natural flow with no transforms
     mm.add(
       '(min-width: 1024px) and (prefers-reduced-motion: no-preference)',
       () => {
@@ -85,7 +86,7 @@ export default function FlowArt({
         );
         if (sections.length === 0) return;
 
-        // Sticky top calculation using visualViewport height or innerHeight
+        // Sticky top calculation: stays frozen while the next section slides over it
         const updateStickyTops = () => {
           const vh = window.visualViewport?.height ?? window.innerHeight;
           sections.forEach((section, idx) => {
@@ -132,7 +133,7 @@ export default function FlowArt({
             section.style.top = '';
           }
 
-          // Entering section ONLY: rotate in from ANGLE to 0 around bottom left, leveling out at top 25%
+          // Entering card ONLY: rotate in from ANGLE to 0 around bottom left, leveling out flat as it arrives
           const inner = section.querySelector<HTMLElement>('[data-flow-inner]');
           if (inner && idx > 0) {
             gsap.fromTo(
