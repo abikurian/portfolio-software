@@ -59,7 +59,7 @@ export function Hero() {
       ref={heroRef}
       id="home"
       aria-label="Introduction"
-      className="bg-background pt-20 sm:pt-24 pb-14 sm:pb-16 border-b border-border/80 justify-center scroll-mt-24"
+      className="theme-dark bg-background pt-20 sm:pt-24 pb-14 sm:pb-16 border-b border-border/80 justify-center scroll-mt-24"
     >
       {/* Kinetic grid background (pointer-events none, behind content) */}
       <KineticGrid parentRef={heroRef} />

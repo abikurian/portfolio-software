@@ -48,7 +48,7 @@ export function Experience() {
   const currentLabel = timelineEntries[activeIdx]?.label || 'Experience';
 
   return (
-    <FlowSection id="experience" aria-labelledby="experience-heading" className="bg-background border-t border-border py-16 sm:py-24 md:py-32 justify-center">
+    <FlowSection id="experience" aria-labelledby="experience-heading" className="theme-dark bg-background border-t border-border py-16 sm:py-24 md:py-32 justify-center">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Section heading & content in columns 1 to 9 */}

@@ -42,7 +42,7 @@ export function Stack() {
   const currentLabel = stackGroups[activeIdx]?.label || stackGroups[0].label;
 
   return (
-    <FlowSection id="skills" aria-labelledby="skills-heading" className="bg-background-light border-t border-border py-16 sm:py-24 md:py-32 justify-center">
+    <FlowSection id="skills" aria-labelledby="skills-heading" className="theme-lemon bg-background border-t border-border py-16 sm:py-24 md:py-32 justify-center">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left numeral at xl (columns 1 to 3) */}

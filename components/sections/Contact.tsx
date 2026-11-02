@@ -23,7 +23,7 @@ export function Contact() {
   };
 
   return (
-    <FlowSection id="contact" aria-labelledby="contact-heading" className="bg-background-light border-t border-border py-16 sm:py-24 md:py-32 justify-center pb-[calc(6rem+env(safe-area-inset-bottom,0px))] sm:pb-36">
+    <FlowSection id="contact" aria-labelledby="contact-heading" className="theme-lemon bg-background border-t border-border py-16 sm:py-24 md:py-32 justify-center pb-[calc(6rem+env(safe-area-inset-bottom,0px))] sm:pb-36">
       <Container>
         <SectionHeading id="contact-heading" title="CONTACT" />
 

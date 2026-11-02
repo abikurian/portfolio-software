@@ -82,7 +82,7 @@ export function Work() {
   const currentCounterLabel = (projects?.[activeIdx] ?? projects?.[0])?.title ?? 'Selected Work';
 
   return (
-    <Section id="work" ariaLabelledBy="work-heading">
+    <Section id="work" ariaLabelledBy="work-heading" className="theme-dark bg-background text-foreground">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Section heading & content in columns 1 to 9 */}

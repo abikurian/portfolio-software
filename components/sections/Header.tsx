@@ -161,7 +161,7 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-[calc(1rem+env(safe-area-inset-top,0px))] left-0 right-0 z-50 flex items-center justify-center pointer-events-none px-4">
+    <header className="fixed top-[calc(1rem+env(safe-area-inset-top,0px))] left-0 right-0 z-50 flex items-center justify-center pointer-events-none px-4 theme-dark">
       {/* Desktop / Tablet NavHeader with sliding highlight */}
       <nav
         aria-label="Primary Navigation"

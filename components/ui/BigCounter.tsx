@@ -69,7 +69,7 @@ export function BigCounter({ value = '01', label = '', side = 'right', className
               isLeft ? 'text-left' : 'text-right'
             )}
             style={{
-              WebkitTextStroke: '1.5px hsl(var(--foreground) / 0.4)',
+              WebkitTextStroke: '1.5px hsl(var(--foreground) / 0.45)',
               color: 'transparent',
             }}
           >
