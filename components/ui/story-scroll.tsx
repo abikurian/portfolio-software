@@ -140,15 +140,20 @@ export default function FlowArt({
           if (inner && idx > 0) {
             gsap.fromTo(
               inner,
-              { rotation: effectiveAngle, transformOrigin: 'bottom left' },
+              {
+                rotation: effectiveAngle,
+                yPercent: 8,
+                transformOrigin: 'bottom left',
+              },
               {
                 rotation: 0,
+                yPercent: 0,
                 ease: 'none',
                 immediateRender: true,
                 scrollTrigger: {
                   trigger: section,
                   start: 'top bottom',
-                  end: 'top 20%',
+                  end: 'top top',
                   scrub: SCRUB,
                   invalidateOnRefresh: true,
                   onToggle: (self) => {
