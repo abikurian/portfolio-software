@@ -43,15 +43,27 @@ export const FlowSection = React.forwardRef<HTMLElement, FlowSectionProps>(
         {...props}
       >
         <div
-          data-flow-inner
-          className={cn(
-            'flow-art-container relative flex min-h-screen min-h-svh w-full flex-col [transform:translateZ(0)] [backface-visibility:hidden]',
-            className
-          )}
-          style={{ transformOrigin: 'bottom left' }}
+          data-flow-scale
+          className="relative flex min-h-screen min-h-svh w-full flex-col [transform:translateZ(0)] [backface-visibility:hidden]"
+          style={{ transformOrigin: 'center top' }}
         >
-          {children}
+          <div
+            data-flow-inner
+            className={cn(
+              'flow-art-container relative flex min-h-screen min-h-svh w-full flex-col [transform:translateZ(0)] [backface-visibility:hidden]',
+              className
+            )}
+            style={{ transformOrigin: 'bottom left' }}
+          >
+            {children}
+          </div>
         </div>
+        {/* Dim overlay for covered sections during scroll */}
+        <div
+          data-flow-dim
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-20 bg-black/90 opacity-0"
+        />
       </section>
     );
   }
@@ -136,6 +148,7 @@ export default function FlowArt({
             section.style.top = '';
           }
 
+          // Entering section: scrubbed rotation and yPercent entrance
           const inner = section.querySelector<HTMLElement>('[data-flow-inner]');
           if (inner && idx > 0) {
             gsap.fromTo(
@@ -163,6 +176,61 @@ export default function FlowArt({
               }
             );
           }
+
+          // Covered section: scale down, parallax lift, and dim overlay
+          if (idx < sections.length - 1) {
+            const nextSection = sections[idx + 1];
+            const scaleWrap = section.querySelector<HTMLElement>('[data-flow-scale]');
+            const dimOverlay = section.querySelector<HTMLElement>('[data-flow-dim]');
+
+            if (scaleWrap) {
+              gsap.fromTo(
+                scaleWrap,
+                {
+                  scale: 1,
+                  yPercent: 0,
+                  transformOrigin: 'center top',
+                },
+                {
+                  scale: PREV_SCALE,
+                  yPercent: PREV_LIFT,
+                  ease: 'none',
+                  immediateRender: true,
+                  scrollTrigger: {
+                    trigger: nextSection,
+                    start: 'top bottom',
+                    end: 'top top',
+                    scrub: SCRUB,
+                    invalidateOnRefresh: true,
+                    onToggle: (self) => {
+                      scaleWrap.style.willChange = self.isActive ? 'transform' : 'auto';
+                    },
+                  },
+                }
+              );
+            }
+
+            if (dimOverlay) {
+              gsap.fromTo(
+                dimOverlay,
+                {
+                  opacity: 0,
+                },
+                {
+                  opacity: PREV_DIM,
+                  ease: 'none',
+                  immediateRender: true,
+                  scrollTrigger: {
+                    trigger: nextSection,
+                    start: 'top bottom',
+                    end: 'top top',
+                    scrub: SCRUB,
+                    invalidateOnRefresh: true,
+                  },
+                }
+              );
+            }
+          }
         });
 
         updateStickyTops();
@@ -179,6 +247,16 @@ export default function FlowArt({
               inner.style.transform = '';
               inner.style.transformOrigin = '';
               inner.style.willChange = 'auto';
+            }
+            const scaleWrap = section.querySelector<HTMLElement>('[data-flow-scale]');
+            if (scaleWrap) {
+              scaleWrap.style.transform = '';
+              scaleWrap.style.transformOrigin = '';
+              scaleWrap.style.willChange = 'auto';
+            }
+            const dimOverlay = section.querySelector<HTMLElement>('[data-flow-dim]');
+            if (dimOverlay) {
+              dimOverlay.style.opacity = '';
             }
           });
         };
