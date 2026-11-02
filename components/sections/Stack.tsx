@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { Container } from '@/components/ui/Container';
-import { Section } from '@/components/ui/Section';
+import { FlowSection } from '@/components/ui/story-scroll';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { BigCounter } from '@/components/ui/BigCounter';
 import { FadeUp } from '@/components/motion/FadeUp';
@@ -42,7 +42,7 @@ export function Stack() {
   const currentLabel = stackGroups[activeIdx]?.label || stackGroups[0].label;
 
   return (
-    <Section id="skills" ariaLabelledBy="skills-heading">
+    <FlowSection id="skills" aria-labelledby="skills-heading" className="bg-background-light border-t border-border py-16 sm:py-24 md:py-32 justify-center">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left numeral at xl (columns 1 to 3) */}
@@ -125,6 +125,6 @@ export function Stack() {
           </div>
         </div>
       </Container>
-    </Section>
+    </FlowSection>
   );
 }

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Container } from '@/components/ui/Container';
-import { Section } from '@/components/ui/Section';
+import { FlowSection } from '@/components/ui/story-scroll';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { FadeUp } from '@/components/motion/FadeUp';
 import { Copy, Check, ArrowUpRight } from 'lucide-react';
@@ -23,7 +23,7 @@ export function Contact() {
   };
 
   return (
-    <Section id="contact" ariaLabelledBy="contact-heading" className="pb-[calc(6rem+env(safe-area-inset-bottom,0px))] sm:pb-36">
+    <FlowSection id="contact" aria-labelledby="contact-heading" className="bg-background-light border-t border-border py-16 sm:py-24 md:py-32 justify-center pb-[calc(6rem+env(safe-area-inset-bottom,0px))] sm:pb-36">
       <Container>
         <SectionHeading id="contact-heading" title="CONTACT" />
 
@@ -128,6 +128,6 @@ export function Contact() {
           </div>
         </div>
       </Container>
-    </Section>
+    </FlowSection>
   );
 }

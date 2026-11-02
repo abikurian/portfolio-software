@@ -9,34 +9,46 @@ export interface FlowSectionProps extends React.HTMLAttributes<HTMLElement> {
   id?: string;
   className?: string;
   'aria-label'?: string;
+  'aria-labelledby'?: string;
   children: React.ReactNode;
 }
 
-export function FlowSection({
-  id,
-  className,
-  'aria-label': ariaLabel,
-  children,
-  ...props
-}: FlowSectionProps) {
-  return (
-    <section
-      id={id}
-      data-flow-section
-      aria-label={ariaLabel}
-      className={cn('relative min-h-screen min-h-svh w-full overflow-clip', className)}
-      {...props}
-    >
-      <div
-        data-flow-inner
-        className="flow-art-container relative flex min-h-screen min-h-svh w-full flex-col will-change-transform"
-        style={{ transformOrigin: 'bottom left' }}
+export const FlowSection = React.forwardRef<HTMLElement, FlowSectionProps>(
+  function FlowSection(
+    {
+      id,
+      className,
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
+      children,
+      ...props
+    },
+    ref
+  ) {
+    return (
+      <section
+        ref={ref}
+        id={id}
+        data-flow-section
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        className="relative min-h-screen min-h-svh w-full overflow-clip scroll-mt-24"
+        {...props}
       >
-        {children}
-      </div>
-    </section>
-  );
-}
+        <div
+          data-flow-inner
+          className={cn(
+            'flow-art-container relative flex min-h-screen min-h-svh w-full flex-col will-change-transform',
+            className
+          )}
+          style={{ transformOrigin: 'bottom left' }}
+        >
+          {children}
+        </div>
+      </section>
+    );
+  }
+);
 
 export interface FlowArtProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
