@@ -51,33 +51,44 @@ export function Header() {
     }
   }, []);
 
-  // Track active section using IntersectionObserver with -45% 0 -45% 0 rootMargin
+  // Track active section based on section positions (handles pinned/stacked & standard sections)
   useEffect(() => {
-    const sectionIds = (NAV_ITEMS ?? []).map((item) => item.href.substring(1));
-    const observers: IntersectionObserver[] = [];
+    const sectionIds = ['contact', 'experience', 'skills', 'work', 'about', 'home'];
 
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
+    let rafId: number | null = null;
+    const checkActiveSection = () => {
+      const scrollBottom = window.innerHeight + window.scrollY;
+      const docHeight = document.documentElement.scrollHeight;
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const hash = `#${id}`;
-              setActiveSection(hash);
-            }
-          });
-        },
-        { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
-      );
+      if (scrollBottom >= docHeight - 60) {
+        setActiveSection('#contact');
+        return;
+      }
 
-      observer.observe(el);
-      observers.push(observer);
-    });
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= 140) {
+          setActiveSection('#' + id);
+          return;
+        }
+      }
+
+      setActiveSection('#home');
+    };
+
+    const onScroll = () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(checkActiveSection);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    checkActiveSection();
 
     return () => {
-      observers.forEach((obs) => obs.disconnect());
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', onScroll);
     };
   }, []);
 
