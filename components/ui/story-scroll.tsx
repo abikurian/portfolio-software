@@ -5,6 +5,13 @@ import { useRef, useEffect } from 'react';
 import { gsap, ScrollTrigger } from '@/lib/gsap';
 import { cn } from '@/lib/utils';
 
+// Tunable constants for stacked scroll transitions
+const ANGLE = 16;        // entering section starts rotated this many degrees
+const SCRUB = 0.8;       // smoothing seconds
+const PREV_SCALE = 0.9;  // covered section shrinks to this
+const PREV_DIM = 0.55;   // covered section darkens to this overlay opacity
+const PREV_LIFT = -6;    // covered section drifts up by this many vh (parallax)
+
 export interface FlowSectionProps extends React.HTMLAttributes<HTMLElement> {
   id?: string;
   className?: string;
@@ -60,19 +67,21 @@ export interface FlowArtProps extends React.HTMLAttributes<HTMLDivElement> {
 export default function FlowArt({
   children,
   className,
-  angle = 6,
+  angle,
   'aria-label': ariaLabel = 'Story scroll',
   ...props
 }: FlowArtProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const effectiveAngle = angle !== undefined ? angle : ANGLE;
 
   useEffect(() => {
     ScrollTrigger.config({ ignoreMobileResize: true });
 
     const mm = gsap.matchMedia();
 
+    // Loosened query to support all desktops and touchscreen laptops >=1024px
     mm.add(
-      '(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)',
+      '(min-width: 1024px) and (prefers-reduced-motion: no-preference)',
       () => {
         if (!containerRef.current) return;
         const sections = Array.from(
@@ -131,7 +140,7 @@ export default function FlowArt({
           if (inner && idx > 0) {
             gsap.fromTo(
               inner,
-              { rotation: angle, transformOrigin: 'bottom left' },
+              { rotation: effectiveAngle, transformOrigin: 'bottom left' },
               {
                 rotation: 0,
                 ease: 'none',
@@ -140,7 +149,7 @@ export default function FlowArt({
                   trigger: section,
                   start: 'top bottom',
                   end: 'top 20%',
-                  scrub: 1,
+                  scrub: SCRUB,
                   invalidateOnRefresh: true,
                   onToggle: (self) => {
                     inner.style.willChange = self.isActive ? 'transform' : 'auto';
@@ -211,7 +220,7 @@ export default function FlowArt({
         console.error('Error in gsap.matchMedia revert():', err);
       }
     };
-  }, [angle]);
+  }, [effectiveAngle]);
 
   return (
     <div
