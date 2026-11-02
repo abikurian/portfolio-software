@@ -48,12 +48,12 @@ export function BigCounter({ value = '01', label = '', side = 'right', className
             initial={
               prefersReduced
                 ? { opacity: 1, y: 0 }
-                : { y: '100%', opacity: 0.5 }
+                : { y: '100%', opacity: 0.5, color: 'hsl(var(--accent))' }
             }
             animate={
               prefersReduced
                 ? { opacity: 1, y: 0 }
-                : { y: '0%', opacity: 1 }
+                : { y: '0%', opacity: 1, color: 'var(--numeral-color)' }
             }
             exit={
               prefersReduced
@@ -69,8 +69,7 @@ export function BigCounter({ value = '01', label = '', side = 'right', className
               isLeft ? 'text-left' : 'text-right'
             )}
             style={{
-              WebkitTextStroke: '1.5px hsl(var(--foreground) / 0.4)',
-              color: 'transparent',
+              color: 'var(--numeral-color)',
             }}
           >
             {safeValue}
@@ -88,7 +87,7 @@ export function BigCounter({ value = '01', label = '', side = 'right', className
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: prefersReduced ? 0.01 : 0.25 }}
             className={cn(
-              'font-mono text-xs uppercase tracking-widest text-muted-foreground truncate max-w-[220px]',
+              'font-mono text-xs uppercase tracking-widest text-muted-foreground truncate max-w-[280px]',
               isLeft ? 'text-left' : 'text-right'
             )}
           >

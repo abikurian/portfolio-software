@@ -2,6 +2,8 @@
 
 /* ─── Raw design tokens ─── */
 :root {
+  --lemon:             70 100% 58%;
+
   /* Engineering dark base — restrained, warm-neutral */
   --background:        12 8% 4%;
   --background-light:  12 8% 4%;
@@ -10,6 +12,9 @@
   --card-foreground:   30 5% 94%;
   --muted:             20 5% 12%;
   --muted-foreground:  25 4% 60%;
+
+  /* BigCounter solid numeral fill */
+  --numeral-color:     hsl(30 5% 94% / 0.9);
 
   /* Accent — lime-chartreuse */
   --primary:           72 100% 55%;
@@ -30,9 +35,50 @@
   --radius:            0px; /* Square corners per section 12.1 */
 }
 
+.theme-dark {
+  --background:        12 8% 4%;
+  --background-light:  12 8% 4%;
+  --foreground:        30 5% 94%;
+  --card:              12 8% 4%;
+  --card-foreground:   30 5% 94%;
+  --muted:             20 5% 12%;
+  --muted-foreground:  25 4% 60%;
+  --numeral-color:     hsl(30 5% 94% / 0.9);
+  --primary:           72 100% 55%;
+  --primary-foreground:  0 0% 6%;
+  --secondary:         20 5% 10%;
+  --secondary-foreground: 30 5% 94%;
+  --accent:            72 100% 55%;
+  --accent-foreground: 0 0% 6%;
+  --border:            20 4% 18%;
+  --input:             20 4% 18%;
+  --ring:              72 100% 55%;
+}
+
+.theme-lemon {
+  --background:        var(--lemon);
+  --background-light:  70 100% 55%;
+  --foreground:        0 0% 7%;
+  --card:              70 100% 55%;
+  --card-foreground:   0 0% 7%;
+  --muted:             70 50% 50%;
+  --muted-foreground:  0 0% 28%;
+  --numeral-color:     hsl(0 0% 7% / 0.92);
+  --primary:           0 0% 7%;
+  --primary-foreground: 70 100% 58%;
+  --secondary:         70 70% 50%;
+  --secondary-foreground: 0 0% 7%;
+  --accent:            0 0% 7%;
+  --accent-foreground: 70 100% 58%;
+  --border:            0 0% 14%;
+  --input:             0 0% 14%;
+  --ring:              0 0% 7%;
+}
+
 /* ─── Tailwind 4 theme wiring ─── */
 @theme inline {
   /* Colors */
+  --color-lemon:                hsl(var(--lemon));
   --color-background:           hsl(var(--background));
   --color-background-light:     hsl(var(--background-light));
   --color-foreground:           hsl(var(--foreground));
@@ -94,13 +140,13 @@
   *::before,
   *::after {
     box-sizing: border-box;
-    border-radius: 0 !important; /* Enforce square corners per 12.1 */
+    border-radius: 0 !important; /* Enforce square corners per section 12.1 */
   }
 
   html {
     color-scheme: dark;
     scroll-behavior: auto; /* Lenis handles smooth scroll */
-    overflow-x: hidden;
+    overflow-x: clip;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -111,7 +157,7 @@
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   /* Focus ring per section 3.3 */

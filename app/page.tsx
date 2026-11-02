@@ -5,18 +5,28 @@ import { Work } from '@/components/sections/Work';
 import { Stack } from '@/components/sections/Stack';
 import { Experience } from '@/components/sections/Experience';
 import { Contact } from '@/components/sections/Contact';
+import FlowArt from '@/components/ui/story-scroll';
 
 export default function Home() {
   return (
     <>
       <Header />
       <main id="main-content" className="relative z-10 flex flex-col">
-        <Hero />
-        <About />
+        {/* Stack A: Hero (id "home") then About (id "about") */}
+        <FlowArt>
+          <Hero />
+          <About />
+        </FlowArt>
+
+        {/* Work (id "work") stays a normal, non-stacked section between the stacks */}
         <Work />
-        <Stack />
-        <Experience />
-        <Contact />
+
+        {/* Stack B: Skills (id "skills"), Experience (id "experience"), Contact (id "contact") */}
+        <FlowArt>
+          <Stack />
+          <Experience />
+          <Contact />
+        </FlowArt>
       </main>
     </>
   );

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { Container } from '@/components/ui/Container';
-import { Section } from '@/components/ui/Section';
+import { FlowSection } from '@/components/ui/story-scroll';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ScrubLine } from '@/components/motion/ScrubLine';
 import { FadeUp } from '@/components/motion/FadeUp';
@@ -48,7 +48,7 @@ export function Experience() {
   const currentLabel = timelineEntries[activeIdx]?.label || 'Experience';
 
   return (
-    <Section id="experience" ariaLabelledBy="experience-heading">
+    <FlowSection id="experience" aria-labelledby="experience-heading" className="theme-dark bg-background border-t border-border py-16 sm:py-24 md:py-32 justify-center">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Section heading & content in columns 1 to 9 */}
@@ -162,6 +162,6 @@ export function Experience() {
           <BigCounter value={currentNum} label={currentLabel} side="right" />
         </div>
       </Container>
-    </Section>
+    </FlowSection>
   );
 }

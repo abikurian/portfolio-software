@@ -40,15 +40,15 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# AI agent configurations
-agents/
+# AI agent files
 .agents/
+agents/
 AGENTS.md
+skills-lock.json
 
-# AI-generated documentation and output
+# Personal documentation
 about.md
 rules.md
-brag-output/
 
-# Agent skill assets
-skills/
+# Generated assets
+brag-output/

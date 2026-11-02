@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { Container } from '@/components/ui/Container';
-import { Section } from '@/components/ui/Section';
+import { FlowSection } from '@/components/ui/story-scroll';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { FadeUp } from '@/components/motion/FadeUp';
 import { BigCounter } from '@/components/ui/BigCounter';
@@ -36,7 +36,7 @@ export function About() {
   }, []);
 
   return (
-    <Section id="about" ariaLabelledBy="about-heading">
+    <FlowSection id="about" aria-labelledby="about-heading" className="theme-lemon bg-background border-t border-border py-16 sm:py-24 md:py-32 justify-center">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left numeral at xl (columns 1 to 3) */}
@@ -62,6 +62,6 @@ export function About() {
           </div>
         </div>
       </Container>
-    </Section>
+    </FlowSection>
   );
 }

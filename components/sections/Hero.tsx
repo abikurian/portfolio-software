@@ -11,6 +11,7 @@ import { useLenis } from '@/components/providers/SmoothScroll';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { IBM_Plex_Sans } from 'next/font/google';
 import { cn } from '@/lib/utils';
+import { FlowSection } from '@/components/ui/story-scroll';
 
 const ibmPlexSansHeroBtn = IBM_Plex_Sans({
   weight: '500',
@@ -54,11 +55,11 @@ export function Hero() {
   );
 
   return (
-    <section
+    <FlowSection
       ref={heroRef}
       id="home"
       aria-label="Introduction"
-      className="relative min-h-screen min-h-svh flex flex-col justify-center pt-20 sm:pt-24 pb-14 sm:pb-16 border-b border-border/80 overflow-hidden scroll-mt-24"
+      className="theme-dark bg-background pt-20 sm:pt-24 pb-14 sm:pb-16 border-b border-border/80 justify-center scroll-mt-24"
     >
       {/* Kinetic grid background (pointer-events none, behind content) */}
       <KineticGrid parentRef={heroRef} />
@@ -132,6 +133,6 @@ export function Hero() {
 
       {/* Tech Marquee pinned to bottom edge per task 5 */}
       <TechMarquee />
-    </section>
+    </FlowSection>
   );
 }

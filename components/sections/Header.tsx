@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLenis } from '@/components/providers/SmoothScroll';
+import { ScrollTrigger } from '@/lib/gsap';
 import { cn } from '@/lib/utils';
 import { X, Menu } from 'lucide-react';
 import { IBM_Plex_Mono } from 'next/font/google';
@@ -51,33 +52,27 @@ export function Header() {
     }
   }, []);
 
-  // Track active section using IntersectionObserver with -45% 0 -45% 0 rootMargin
+  // Track active section using ScrollTrigger cached positions (zero layout reads during scroll)
   useEffect(() => {
-    const sectionIds = (NAV_ITEMS ?? []).map((item) => item.href.substring(1));
-    const observers: IntersectionObserver[] = [];
+    const sectionIds = ['home', 'about', 'work', 'skills', 'experience', 'contact'];
+    const triggers: ScrollTrigger[] = [];
 
     sectionIds.forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const hash = `#${id}`;
-              setActiveSection(hash);
-            }
-          });
-        },
-        { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
-      );
-
-      observer.observe(el);
-      observers.push(observer);
+      const st = ScrollTrigger.create({
+        trigger: el,
+        start: id === 'home' ? 'top top' : 'top 200px',
+        end: 'bottom 200px',
+        onEnter: () => setActiveSection('#' + id),
+        onEnterBack: () => setActiveSection('#' + id),
+      });
+      triggers.push(st);
     });
 
     return () => {
-      observers.forEach((obs) => obs.disconnect());
+      triggers.forEach((st) => st.kill());
     };
   }, []);
 
@@ -166,7 +161,7 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-[calc(1rem+env(safe-area-inset-top,0px))] left-0 right-0 z-50 flex items-center justify-center pointer-events-none px-4">
+    <header className="fixed top-[calc(1rem+env(safe-area-inset-top,0px))] left-0 right-0 z-50 flex items-center justify-center pointer-events-none px-4 theme-dark">
       {/* Desktop / Tablet NavHeader with sliding highlight */}
       <nav
         aria-label="Primary Navigation"
