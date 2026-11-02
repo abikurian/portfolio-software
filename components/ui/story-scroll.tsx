@@ -38,7 +38,7 @@ export const FlowSection = React.forwardRef<HTMLElement, FlowSectionProps>(
         <div
           data-flow-inner
           className={cn(
-            'flow-art-container relative flex min-h-screen min-h-svh w-full flex-col will-change-transform',
+            'flow-art-container relative flex min-h-screen min-h-svh w-full flex-col',
             className
           )}
           style={{ transformOrigin: 'bottom left' }}
@@ -80,50 +80,88 @@ export default function FlowArt({
         );
         if (sections.length === 0) return;
 
-        const triggers: ScrollTrigger[] = [];
+        // Sticky top calculation using visualViewport height or innerHeight
+        const updateStickyTops = () => {
+          const vh = window.visualViewport?.height ?? window.innerHeight;
+          sections.forEach((section, idx) => {
+            if (idx < sections.length - 1) {
+              const sectionHeight = section.offsetHeight;
+              const topVal = Math.min(0, vh - sectionHeight);
+              section.style.top = `${topVal}px`;
+            }
+          });
+        };
+
+        // ResizeObserver on each section
+        const ro = new ResizeObserver(() => {
+          updateStickyTops();
+        });
+
+        let lastWidth = window.innerWidth;
+        let lastHeight = window.innerHeight;
+
+        const handleResize = () => {
+          const newWidth = window.innerWidth;
+          const newHeight = window.innerHeight;
+          // Ignore mobile address bar only changes
+          if (newWidth === lastWidth && Math.abs(newHeight - lastHeight) <= 150) {
+            return;
+          }
+          lastWidth = newWidth;
+          lastHeight = newHeight;
+          updateStickyTops();
+        };
+
+        window.addEventListener('resize', handleResize);
 
         sections.forEach((section, idx) => {
-          gsap.set(section, { zIndex: idx + 1 });
-          const inner = section.querySelector<HTMLElement>('.flow-art-container');
-          if (inner) {
-            if (idx > 0) {
-              gsap.set(inner, { rotation: angle, transformOrigin: 'bottom left' });
-              const tween = gsap.to(inner, {
+          ro.observe(section);
+
+          const isLast = idx === sections.length - 1;
+          section.style.zIndex = String(idx + 1);
+
+          if (!isLast) {
+            section.style.position = 'sticky';
+          } else {
+            section.style.position = 'relative';
+            section.style.top = '';
+          }
+
+          const inner = section.querySelector<HTMLElement>('[data-flow-inner]');
+          if (inner && idx > 0) {
+            gsap.fromTo(
+              inner,
+              { rotation: angle, transformOrigin: 'bottom left' },
+              {
                 rotation: 0,
                 ease: 'none',
+                immediateRender: true,
                 scrollTrigger: {
                   trigger: section,
                   start: 'top bottom',
-                  end: 'top 25%',
-                  scrub: true,
+                  end: 'top 20%',
+                  scrub: 1,
+                  invalidateOnRefresh: true,
                 },
-              });
-              if (tween.scrollTrigger) {
-                triggers.push(tween.scrollTrigger);
               }
-            }
-
-            if (idx < sections.length - 1) {
-              const pinTrigger = ScrollTrigger.create({
-                trigger: section,
-                start: 'bottom bottom',
-                end: 'bottom top',
-                pin: true,
-                pinSpacing: false,
-              });
-              triggers.push(pinTrigger);
-            }
+            );
           }
         });
 
-        ScrollTrigger.refresh();
+        updateStickyTops();
 
         return () => {
-          triggers.forEach((t) => {
-            try {
-              t.kill();
-            } catch (err) {
-              console.error('Error killing ScrollTrigger:', err);
+          ro.disconnect();
+          window.removeEventListener('resize', handleResize);
+          sections.forEach((section) => {
+            section.style.position = '';
+            section.style.top = '';
+            section.style.zIndex = '';
+            const inner = section.querySelector<HTMLElement>('[data-flow-inner]');
+            if (inner) {
+              inner.style.transform = '';
+              inner.style.transformOrigin = '';
+              inner.style.willChange = 'auto';
             }
           });
         };
@@ -141,24 +179,29 @@ export default function FlowArt({
         });
     }
 
-    // Debounced resize handler (200ms)
+    // Debounced resize handler (250ms) firing only when no scroll has occurred
     let resizeTimer: NodeJS.Timeout | null = null;
-    const handleResize = () => {
+    let scrollAtResize = typeof window !== 'undefined' ? window.scrollY : 0;
+
+    const handleDebouncedResize = () => {
+      scrollAtResize = window.scrollY;
       if (resizeTimer) clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        try {
-          ScrollTrigger.refresh();
-        } catch (err) {
-          console.error('Error in debounced resize ScrollTrigger.refresh():', err);
+        if (window.scrollY === scrollAtResize) {
+          try {
+            ScrollTrigger.refresh();
+          } catch (err) {
+            console.error('Error in debounced resize ScrollTrigger.refresh():', err);
+          }
         }
-      }, 200);
+      }, 250);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleDebouncedResize);
 
     return () => {
       if (resizeTimer) clearTimeout(resizeTimer);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', handleDebouncedResize);
       try {
         mm.revert();
       } catch (err) {
