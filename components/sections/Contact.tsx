@@ -69,16 +69,6 @@ export function Contact() {
                 </div>
               </div>
 
-              <div className="pt-8 border-t border-border/40 font-mono text-xs text-muted-foreground flex flex-wrap gap-8">
-                <div>
-                  <span className="block text-foreground/60 uppercase">LOCATION</span>
-                  <span>Kochi, Kerala, India</span>
-                </div>
-                <div>
-                  <span className="block text-foreground/60 uppercase">TIMEZONE</span>
-                  <span>IST (UTC +05:30)</span>
-                </div>
-              </div>
             </FadeUp>
           </div>
 
