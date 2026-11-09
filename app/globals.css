@@ -33,6 +33,11 @@
   --input:             20 4% 18%;
   --ring:              72 100% 55%;
   --radius:            0px; /* Square corners per section 12.1 */
+
+  /* ContactCards floating cards */
+  --cc-surface:        #ffffff;
+  --cc-ink:            hsl(0 0% 6%);
+  --cc-muted:          hsl(0 0% 38%);
 }
 
 .theme-dark {
