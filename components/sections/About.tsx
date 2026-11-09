@@ -7,8 +7,14 @@ import { FlowSection } from '@/components/ui/story-scroll';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { FadeUp } from '@/components/motion/FadeUp';
 import { BigCounter } from '@/components/ui/BigCounter';
+import type { ContributionDay } from '@/components/ui/contact-cards';
 
-export function About() {
+export interface AboutProps {
+  githubDays?: ContributionDay[];
+}
+
+export function About({ githubDays = [] }: AboutProps = {}) {
+  void githubDays;
   const [currentNum, setCurrentNum] = useState('01');
   const p1Ref = useRef<HTMLParagraphElement>(null);
   const p2Ref = useRef<HTMLParagraphElement>(null);

@@ -6,8 +6,11 @@ import { Stack } from '@/components/sections/Stack';
 import { Experience } from '@/components/sections/Experience';
 import { Contact } from '@/components/sections/Contact';
 import FlowArt from '@/components/ui/story-scroll';
+import { getContributions } from '@/lib/github-contributions';
 
-export default function Home() {
+export default async function Home() {
+  const githubDays = await getContributions('abikurian');
+
   return (
     <>
       <Header />
@@ -15,7 +18,7 @@ export default function Home() {
         {/* Stack A: Hero (id "home") then About (id "about") */}
         <FlowArt>
           <Hero />
-          <About />
+          <About githubDays={githubDays ?? []} />
         </FlowArt>
 
         {/* Work (id "work") stays a normal, non-stacked section between the stacks */}
