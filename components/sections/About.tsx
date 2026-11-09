@@ -7,14 +7,18 @@ import { FlowSection } from '@/components/ui/story-scroll';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { FadeUp } from '@/components/motion/FadeUp';
 import { BigCounter } from '@/components/ui/BigCounter';
-import type { ContributionDay } from '@/components/ui/contact-cards';
+import ContactCards, {
+  Monogram,
+  LinkedinIcon,
+  LinkedinCard,
+  type ContributionDay,
+} from '@/components/ui/contact-cards';
 
 export interface AboutProps {
   githubDays?: ContributionDay[];
 }
 
 export function About({ githubDays = [] }: AboutProps = {}) {
-  void githubDays;
   const [currentNum, setCurrentNum] = useState('01');
   const p1Ref = useRef<HTMLParagraphElement>(null);
   const p2Ref = useRef<HTMLParagraphElement>(null);
@@ -65,6 +69,37 @@ export function About({ githubDays = [] }: AboutProps = {}) {
                 </p>
               </FadeUp>
             </div>
+
+            <FadeUp delay={0.12} className="mt-[clamp(2rem,4vw,3.5rem)]">
+              <ContactCards
+                email="abikurianvarghese@gmail.com"
+                github={{
+                  username: 'abikurian',
+                  url: 'https://github.com/abikurian',
+                  days: githubDays,
+                  avatar: <Monogram className="size-9 shrink-0" />,
+                }}
+                links={[
+                  {
+                    label: 'LinkedIn',
+                    href: 'https://linkedin.com/in/abi-kurian-varghese',
+                    icon: <LinkedinIcon className="size-5 fill-current" />,
+                    card: (
+                      <LinkedinCard
+                        name="Abi Kurian Varghese"
+                        title="Computer Science student · Full-stack developer"
+                        avatar={<Monogram className="size-10 shrink-0" />}
+                      />
+                    ),
+                  },
+                ]}
+                labels={{
+                  copy: 'Copy my email',
+                  copied: 'Email copied',
+                  contributions: 'contributions in the last year',
+                }}
+              />
+            </FadeUp>
           </div>
         </div>
       </Container>
