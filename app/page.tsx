@@ -18,7 +18,7 @@ export default async function Home() {
         {/* Stack A: Hero (id "home") then About (id "about") */}
         <FlowArt>
           <Hero />
-          <About githubDays={githubDays ?? []} />
+          <About />
         </FlowArt>
 
         {/* Work (id "work") stays a normal, non-stacked section between the stacks */}
@@ -28,7 +28,7 @@ export default async function Home() {
         <FlowArt>
           <Stack />
           <Experience />
-          <Contact />
+          <Contact githubDays={githubDays ?? []} />
         </FlowArt>
       </main>
     </>
